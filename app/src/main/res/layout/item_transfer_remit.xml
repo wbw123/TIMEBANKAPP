@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_bg"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--<TextView
+            android:id="@+id/tran_gather_from_guid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingTop="3dp"
+            android:text="转账者账号名："
+            android:textColor="#a000"
+            android:textSize="13dp" />-->
+
+        <TextView
+            android:id="@+id/tran_remit_to_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingTop="3dp"
+            android:text="接受者账号名："
+            android:textColor="#a000"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/tran_remit_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingTop="3dp"
+            android:text="转账时间："
+            android:textColor="#a000"
+            android:textSize="13dp" />
+        <TextView
+            android:id="@+id/tran_remit_desp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="3"
+            android:paddingTop="3dp"
+            android:text="备注："
+            android:textColor="#a000"
+            android:textSize="13dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="3dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tran_remit_currency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="转账货币："
+                android:textColor="#a000"
+                android:textSize="13dp" />
+
+            <TextView
+                android:id="@+id/tran_remit_process"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="转账进程："
+                android:textColor="#a000"
+                android:textSize="13dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/tran_gather_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="确认收款" />
+
+        <Button
+            android:id="@+id/tran_gather_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="拒绝收款" />
+    </LinearLayout>-->
+
+</LinearLayout>

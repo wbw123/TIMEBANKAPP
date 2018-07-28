@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">TimeBank</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="bottom_tab_home">首页</string>
+
+    <string name="bottom_tab_request">请求</string>
+
+    <string name="bottom_tab_activity">活动</string>
+
+    <string name="bottom_tab_money">转账</string>
+
+    <string name="bottom_tab_me">我的</string>
+
+    <!--time widget-->
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="current_time">当前时间</string>
+</resources>

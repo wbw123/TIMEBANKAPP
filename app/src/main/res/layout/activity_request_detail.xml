@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_request_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="30dp"
+    tools:context="com.chase.timebank.RequestDetailActivity">
+
+    <ScrollView
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="85dp"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求ID:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求提出时间:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="2"
+                        android:text="请求提出地址:"
+                        android:textSize="25sp" />
+
+                    <Button
+                        android:id="@+id/btn_show_map"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_login_selector"
+                        android:text="在地图上显示" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/req_detail_addr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求标题:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求描述:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求补充:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_com"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求分类:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_class"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求可用开始时间:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_ava_start_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求可用结束时间:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_ava_end_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="预计持续时间:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_dur_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求需要人数:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求紧急程度:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_urgency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求批准状态:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_appr_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="请求处理状态:"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_pro_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_res_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:text="您的当前地址:"
+                        android:textSize="25sp" />
+
+                    <Button
+                        android:id="@+id/btn_res_location"
+                        android:layout_width="180dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/btn_login_selector"
+                        android:text="自动获取当前位置信息" />
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/res_addr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:hint="请输入您的当前地址"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!--我的请求 使用-->
+    <LinearLayout
+        android:id="@+id/ll_req_my"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <Button
+                android:id="@+id/req_detail_update"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:background="@drawable/btn_login_selector"
+                android:text="更新请求"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/req_detail_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="@drawable/btn_login_selector"
+                android:text="撤销"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/req_detail_start"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="@drawable/btn_login_selector"
+                android:text="启动"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <Button
+                android:id="@+id/req_detail_query_vol"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:background="@drawable/btn_login_selector"
+                android:text="查看志愿者"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/req_detail_complete"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="@drawable/btn_login_selector"
+                android:text="已完成"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/req_detail_incomplete"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:background="@drawable/btn_login_selector"
+                android:text="未完成"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--服务列表 使用-->
+    <LinearLayout
+        android:id="@+id/ll_ser_list"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="2">
+
+
+        <Button
+            android:id="@+id/req_apply_service"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/btn_login_selector"
+            android:text="申请服务"
+            android:textColor="#5c5c5c"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/req_back"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/btn_login_selector"
+            android:text="返回"
+            android:textColor="#5c5c5c"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+    <!--我的服务 使用-->
+    <LinearLayout
+        android:id="@+id/ll_ser_my"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="2">
+
+
+        <Button
+            android:id="@+id/res_update"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/btn_login_selector"
+            android:text="更新请求"
+            android:textColor="#5c5c5c"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/res_back"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/btn_login_selector"
+            android:text="返回"
+            android:textColor="#5c5c5c"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</RelativeLayout>

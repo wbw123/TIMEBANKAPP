@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/nav_1"
+            android:icon="@mipmap/husky1"
+            android:title="发布请求"/>
+
+        <item
+            android:id="@+id/nav_2"
+            android:icon="@mipmap/husky2"
+            android:title="我要汇款"/>
+
+        <item
+            android:id="@+id/nav_3"
+            android:icon="@mipmap/husky3"
+            android:title="husky03"/>
+
+        <item
+            android:id="@+id/nav_4"
+            android:icon="@mipmap/husky4"
+            android:title="husky04"/>
+</menu>

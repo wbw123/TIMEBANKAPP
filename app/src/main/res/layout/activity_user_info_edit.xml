@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_info_edit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_layout" />
+
+    <RelativeLayout
+        android:id="@+id/layout_head"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white_color"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_head_picture"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/husky0"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="1dp" />
+
+        <ImageView
+            android:id="@+id/iv_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:src="@mipmap/icon_camera"
+            android:textColor="@color/black_color"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/interval_color" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shallow_white_color"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:src="@mipmap/icon_avatar" />
+
+                <TextView
+                    style="@style/icon_rightText_style"
+                    android:layout_toRightOf="@+id/iv_avatar"
+                    android:text="账号" />
+
+                <TextView
+                    android:id="@+id/tv_edituserAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical|right"
+                    android:text="husky"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/icon_name"
+                    android:textColor="@color/black_color" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_name"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
+
+                    <com.chase.timebank.view.CleanEditText
+                        android:id="@+id/cet_edituserName"
+                        style="@style/CleanEditText_style"
+                        android:hint="真实姓名"
+                        android:inputType="text"
+                        android:maxLength="32"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:src="@mipmap/icon_gender" />
+
+                <TextView
+                    style="@style/icon_rightText_style"
+                    android:layout_toRightOf="@+id/iv_gender"
+                    android:text="性别" />
+
+                <Spinner
+                    android:id="@+id/sp_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/icon_mail"
+                    android:textColor="@color/black_color" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_mail"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
+
+                    <com.chase.timebank.view.CleanEditText
+                        android:id="@+id/cet_edituserMail"
+                        style="@style/CleanEditText_style"
+                        android:hint="邮箱"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="32"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/icon_phone"
+                    android:textColor="@color/black_color" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_phone"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
+
+                    <com.chase.timebank.view.CleanEditText
+                        android:id="@+id/cet_edituserPhone"
+                        style="@style/CleanEditText_style"
+                        android:hint="手机号"
+                        android:inputType="number"
+                        android:maxLength="13"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/icon_id"
+                    android:textColor="@color/black_color" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_id"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
+
+                    <com.chase.timebank.view.CleanEditText
+                        android:id="@+id/cet_edituserIdNum"
+                        style="@style/CleanEditText_style"
+                        android:hint="身份证号"
+                        android:inputType="none"
+                        android:maxLength="18"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_birthdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:src="@mipmap/icon_birthdate" />
+
+                <TextView
+                    android:id="@+id/tv_edituserBirthdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical|right"
+                    android:hint="点击选择"
+                    android:textColor="#f0333333"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/icon_rightText_style"
+                    android:layout_alignBaseline="@+id/tv_edituserBirthdate"
+                    android:layout_alignBottom="@+id/tv_edituserBirthdate"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/iv_birthdate"
+                    android:layout_toRightOf="@+id/iv_birthdate"
+                    android:text="出生日期" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_comm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:src="@mipmap/icon_comm" />
+
+                <TextView
+                    style="@style/icon_rightText_style"
+                    android:layout_toRightOf="@+id/iv_comm"
+                    android:text="小区" />
+
+                <Spinner
+                    android:id="@+id/sp_com"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_emerperson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/icon_emer_person"
+                    android:textColor="@color/black_color" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_emerperson"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
+
+                    <com.chase.timebank.view.CleanEditText
+                        android:id="@+id/cet_edituserEmerPerson"
+                        style="@style/CleanEditText_style"
+                        android:hint="紧急联系人姓名"
+                        android:inputType="text"
+                        android:maxLength="32"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_emercontact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/icon_emer_contact"
+                    android:textColor="@color/black_color" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_emercontact"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
+
+                    <com.chase.timebank.view.CleanEditText
+                        android:id="@+id/cet_edituserEmerContact"
+                        style="@style/CleanEditText_style"
+                        android:hint="紧急联系号码"
+                        android:inputType="number"
+                        android:maxLength="13"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_pca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:src="@mipmap/icon_pca" />
+
+                <TextView
+                    android:id="@+id/tv_edituserPCA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical|right"
+                    android:hint="点击选择"
+                    android:textColor="#f0333333"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/icon_rightText_style"
+                    android:layout_alignBaseline="@+id/tv_edituserPCA"
+                    android:layout_alignBottom="@+id/tv_edituserPCA"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/iv_pca"
+                    android:layout_toRightOf="@+id/iv_pca"
+                    android:text="省 市 区" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_addr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingTop="10dp"
+                    android:src="@mipmap/icon_addr"
+                    android:textColor="@color/black_color" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_addr"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
+
+                    <com.chase.timebank.view.CleanEditText
+                        android:id="@+id/cet_editUserAddr"
+                        style="@style/CleanEditText_style"
+                        android:hint="详细地址"
+                        android:inputType="text"
+                        android:maxLines="2" />
+                </android.support.design.widget.TextInputLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/srl_ser_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    app:srlAccentColor="@color/colorPrimary"
+    app:srlEnablePreviewInEditMode="true"
+    app:srlPrimaryColor="#fff">
+    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
+    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:id="@+id/req_ser_list_header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_ser_list"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/nightModeColor">
+        </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout
+            android:id="@+id/rl_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/page_iv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_error_page" />
+
+            <Button
+                android:id="@+id/btn_reload"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:layout_below="@id/page_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_bg"
+                android:ellipsize="end"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:text="加载失败,点击重试"
+                android:textColor="#ff717171"
+                android:textSize="14dp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        android:id="@+id/req_ser_list_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

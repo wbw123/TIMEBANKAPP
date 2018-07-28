@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chase.timebank"
+    android:versionCode="1"
+    android:versionName="1.0测试版">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 允许程序访问额外的定位提供者指令获取模拟定位信息 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <application
+        android:name=".global.TimeBankApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="i7vbfA7lX21bs9EZTfGNoYEl12ai6ZMs" />
+
+        <activity android:name=".HomeActivity" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <activity
+            android:name=".BaseActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:label="@string/title_activity_base"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".UserInfoEditActivity" />
+        <activity android:name=".InsertRequestActivity" />
+        <activity android:name=".RequestDetailActivity" />
+        <activity android:name=".UpdateReqMyActivity" />
+        <activity android:name=".ActDetailActivity" />
+        <activity android:name=".QueryVolunteerListActivity" />
+        <activity android:name=".InsertTransferActivity" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".BDMapActivity" />
+        <activity android:name=".BDNavActivity" />
+        <activity
+            android:name=".BDGuideActivity"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
+            android:label="GPS导航"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".register.RegisterActivity"></activity>
+    </application>
+
+</manifest>

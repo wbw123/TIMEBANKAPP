@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="180dp"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:background="@color/colorPrimaryDark"
+             android:gravity="center"
+             android:orientation="vertical"
+             android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <LinearLayout
+        android:id="@+id/nav_header"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/nav_user_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/husky0"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/nav_userAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="我最萌~"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    </LinearLayout>
+
+</FrameLayout>

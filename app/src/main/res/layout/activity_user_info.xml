@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.chase.timebank.UserInfoActivity">
+
+    <include layout="@layout/title_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/shallow_white_color"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/interval_color"
+            android:layout_height="10dp"/>
+
+        <RelativeLayout
+            android:id="@+id/layout_head"
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_head_picture"
+                android:layout_centerHorizontal="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/husky0"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@android:color/white"/>
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <RelativeLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:text="账号"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/tv_userAccount"
+                android:layout_toRightOf="@+id/tv_1"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="husky"
+                android:textColor="@color/default_text_color"
+                android:gravity="center_vertical|right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+        <RelativeLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_2"
+                android:text="角色"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/tv_role"
+                android:layout_toRightOf="@+id/tv_2"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="dog"
+                android:textColor="@color/default_text_color"
+                android:gravity="center_vertical|right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
+        <RelativeLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_3"
+                android:text="性别"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/tv_gender"
+                android:layout_toRightOf="@+id/tv_3"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="公的"
+                android:textColor="@color/default_text_color"
+                android:gravity="center_vertical|right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
+        <RelativeLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_4"
+                android:text="用户状态"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/tv_userSate"
+                android:layout_toRightOf="@+id/tv_4"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="萌萌哒"
+                android:textColor="@color/default_text_color"
+                android:gravity="center_vertical|right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+        <RelativeLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_5"
+                android:text="持有时间币"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_toRightOf="@+id/tv_5"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="0.0"
+                android:textColor="@color/default_text_color"
+                android:gravity="center_vertical|right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+        <RelativeLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_6"
+                android:text="用户住址"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/tv_userAddress"
+                android:layout_toRightOf="@+id/tv_6"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="拆迁队大本营"
+                android:textColor="@color/default_text_color"
+                android:gravity="center_vertical|right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+        <RelativeLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tv_7"
+                android:text="所属小区"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/tv_userCom"
+                android:layout_toRightOf="@+id/tv_7"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:text="地球村"
+                android:textColor="@color/default_text_color"
+                android:gravity="center_vertical|right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+        <LinearLayout
+            android:background="@color/white_color"
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn_editInfo"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|left"
+                android:background="@drawable/btn_login_selector"
+                android:text="完善信息"
+                android:layout_marginRight="20dp"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_exit"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:background="@drawable/btn_login_selector"
+                android:text="退出登录"
+                android:textColor="#5c5c5c"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

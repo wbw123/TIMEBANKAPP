@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_bg"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/res_vol_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="志愿者姓名："
+            android:textColor="#a000"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/res_vol_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:paddingTop="3dp"
+        android:text="接收地址："
+        android:textColor="#a000"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/res_vol_accept_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:paddingTop="3dp"
+        android:text="接收时间："
+        android:textColor="#a000"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/res_vol_start_end_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:paddingTop="3dp"
+        android:text="从 2017-12-12 15:30:52 到 2018-12-12 15:30:52"
+        android:textColor="#a000"
+        android:textSize="13dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="3dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/res_vol_process"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="处理状态："
+            android:textColor="#a000"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/res_vol_evaluate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="服务打分："
+            android:textColor="#a000"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_nav"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chase.timebank.BDNavActivity">
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/nav_map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+    </com.baidu.mapapi.map.MapView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/nav_my_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我在哪儿"/>
+
+        <Button
+            android:id="@+id/nav_relnav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始导航"/>
+        <Button
+            android:id="@+id/nav_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退出导航"/>
+    </LinearLayout>
+</RelativeLayout>
