@@ -2,6 +2,7 @@ package com.chase.timebank.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,17 @@ public class RequestMyAdapter extends RecyclerView.Adapter<RequestMyAdapter.MyHo
         holder.ReqMyUrgency.setText("紧急程度：" + mDatas.get(position).getReqTypeGuidUrgency());
         holder.ReqMyApprStatus.setText("批准状态：" + mDatas.get(position).getReqTypeApproveStatus());
         holder.ReqMyProcStatus.setText("处理状态：" + mDatas.get(position).getReqTypeGuidProcessStatus());
+        if (mDatas.get(position).getReqTypeGuidProcessStatus().equals("撤销")) {
+            holder.ReqMyTitle.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyNum.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyAddr.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyClass.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyStartEndTime.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyIssueTime.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyUrgency.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyApprStatus.setTextColor(Color.parseColor("#afb4b4"));
+            holder.ReqMyProcStatus.setTextColor(Color.parseColor("#afb4b4"));
+        }
     }
 
     @Override

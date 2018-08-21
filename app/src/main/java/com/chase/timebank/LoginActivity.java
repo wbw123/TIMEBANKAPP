@@ -76,9 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                             ToastUtils.ToastShort(activity, resultModel.getMsg());
                             break;
                         case 4:
-                            ToastUtils.ToastShort(activity, resultModel.getMsg());
+                            ToastUtils.ToastShort(activity, "登录成功");
                             Intent intent = new Intent(activity, HomeActivity.class);
-                            intent.putExtra("userAccount", activity.mUserAccount);
+                            intent.putExtra("userAccount", activity.mUserName);
+                            intent.putExtra("userRole", resultModel.getMsg());
                             activity.startActivity(intent);
                             activity.finish();
                             break;
@@ -89,14 +90,14 @@ public class LoginActivity extends AppCompatActivity {
     }
     LoginHandler loginHandler = new LoginHandler(this);
 
-    private String mUserAccount;
+    private String mUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        mEtUsername.setText("张春萌");
+        mEtUsername.setText("用户1");
         mEtPassword.setText("123");
     }
 
@@ -119,14 +120,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void _loginUser() {
-        mUserAccount = mEtUsername.getText().toString();
+        mUserName = mEtUsername.getText().toString();
         String userPassword = mEtPassword.getText().toString();
-        if (TextUtils.isEmpty(mUserAccount) || TextUtils.isEmpty(userPassword)) {
+        if (TextUtils.isEmpty(mUserName) || TextUtils.isEmpty(userPassword)) {
             ToastUtils.ToastLong(this, "用户名或密码不能为空！");
             return;
         }
         RequestParams params = new RequestParams(Url.LOGIN_URL);
-        params.addBodyParameter("userAccount", mUserAccount);
+        params.addBodyParameter("userAccount", mUserName);
         params.addBodyParameter("userPassword", userPassword);
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override

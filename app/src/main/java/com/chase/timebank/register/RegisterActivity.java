@@ -68,6 +68,9 @@ public class RegisterActivity extends AppCompatActivity {
                     ToastUtils.ToastShort(activity, resultModel.getMsg());
                     activity.finish();
                     break;
+                case 11://账号已存在
+                    ToastUtils.ToastLong(activity, resultModel.getMsg());
+                    break;
             }
         }
     }
@@ -126,7 +129,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Message msg = new Message();
                 msg.obj = resultModel;
                 registerHandler.sendMessage(msg);
-                ToastUtils.ToastShort(getApplicationContext(), "onSuccess: result=" + result);
             }
 
             @Override

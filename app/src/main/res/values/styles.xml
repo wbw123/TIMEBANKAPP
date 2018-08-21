@@ -64,4 +64,56 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/background</item>
     </style>
+
+    <!--HomeEMCFragment mid view-->
+    <style name="home_emc_midView">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_me_selector</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+     <style name="MyDialog" parent="@android:style/Theme.Dialog">
+    <!--<style name="MyDialog" parent="@android:style/Theme.Holo.Dialog">-->
+        <!-- 是否有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--是否在悬浮Activity之上  -->
+        <item name="android:windowIsFloating">true</item>
+        <!--标题  -->
+        <item name="android:windowNoTitle">true</item>
+        <!--阴影  -->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <!-- 进入和退出的动画 -->
+        <!--<item name="android:windowAnimationStyle">@style/MyDialogAnimation</item>-->
+         <!-- 背景颜色及透明程度 -->
+         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!-- 点外边可以消失  -->
+        <item name="android:windowCloseOnTouchOutside">true</item>
+
+    </style>
+
+
+    <!--<style name="MyDialogAnimation">-->
+        <!--&lt;!&ndash;进入 &ndash;&gt;-->
+        <!--<item name="android:windowEnterAnimation">@anim/dialog_enter</item>-->
+        <!--&lt;!&ndash;退出&ndash;&gt;-->
+        <!--<item name="android:windowExitAnimation">@anim/dialog_exit</item>-->
+    <!--</style>-->
+
+    <!-- dialog样式 -->
+    <style name="dialog_custom" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsFloating">true</item>    <!--是否浮在界面上-->
+        <item name="android:windowIsTranslucent">true</item> <!--是否半透明-->
+        <item name="android:windowNoTitle">false</item>       <!--是否有标题-->
+        <item name="android:windowBackground">@android:color/transparent</item> <!--窗口背景色透明-->
+        <item name="android:backgroundDimEnabled">true</item> <!--背景是否模糊显示-->
+    </style>
+
+    <!-- dialog底部弹出菜单动画 -->
+    <style name="bottom_menu_animation" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/bottom_menu_enter</item>
+        <item name="@android:windowExitAnimation">@anim/bottom_menu_exit</item>
+    </style>
 </resources>

@@ -53,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/shallow_white_color"
+            android:paddingBottom="15dp"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -387,6 +388,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
@@ -413,7 +415,7 @@
                     <com.chase.timebank.view.CleanEditText
                         android:id="@+id/cet_edituserEmerContact"
                         style="@style/CleanEditText_style"
-                        android:hint="紧急联系号码"
+                        android:hint="紧急联系电话"
                         android:inputType="number"
                         android:maxLength="13"
                         android:maxLines="1" />
@@ -497,6 +499,30 @@
                 </android.support.design.widget.TextInputLayout>
 
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:background="@color/white_color"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/cb_register_agree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tv_protocol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/tv_protocol"/>
+            </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

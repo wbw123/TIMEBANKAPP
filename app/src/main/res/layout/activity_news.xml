@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    app:srlAccentColor="@color/colorPrimary"
+    app:srlEnablePreviewInEditMode="true"
+    app:srlPrimaryColor="#fff">
+    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
+    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:id="@+id/refresh_header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/nightModeColor"></ListView>
+        <TextView
+            android:id="@+id/tv_top"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="推荐图文"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:background="#cc40AA53"
+            android:textSize="20sp"
+            android:visibility="visible"/>
+
+    </FrameLayout>
+
+
+    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        android:id="@+id/refresh_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

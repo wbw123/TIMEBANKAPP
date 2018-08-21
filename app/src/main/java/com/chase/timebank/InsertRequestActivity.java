@@ -20,6 +20,12 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeOption;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
@@ -66,6 +72,8 @@ public class InsertRequestActivity extends AppCompatActivity {
     EditText mReqNum;
     @BindView(R.id.btn_bd_location)
     Button mBDlocation;
+    @BindView(R.id.btn_check)
+    Button mBtnCheck;
 
     /*spinner适配*/
     private ArrayAdapter<String> mReqClassAdapter;
@@ -92,6 +100,7 @@ public class InsertRequestActivity extends AppCompatActivity {
     };
     private LocationClient mLocationClient;
     private MyBDLocationListener mBDLocationListener;
+    private String mAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +198,8 @@ public class InsertRequestActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.tv_req_avail_start_time, R.id.tv_req_avail_end_time, R.id.btn_req_save, R.id.btn_req_back,R.id.btn_bd_location})
+    @OnClick({R.id.tv_req_avail_start_time, R.id.tv_req_avail_end_time, R.id.btn_req_save, R.id.btn_req_back
+            , R.id.btn_bd_location, R.id.btn_check})
     public void clickCase(View view) {
         switch (view.getId()) {
             case R.id.tv_req_avail_start_time:
@@ -226,13 +236,44 @@ public class InsertRequestActivity extends AppCompatActivity {
                 Log.d(TAG, "定位功能被点击了");
                 getLocation();
                 break;
+            case R.id.btn_check:
+                String addr = mReqAddress.getText().toString();
+                GeoCoder mSearch = GeoCoder.newInstance();
+                mSearch.setOnGetGeoCodeResultListener(listener);
+                mSearch.geocode(new GeoCodeOption()
+                        .city("青岛市")
+                        .address(addr));
+                break;
         }
 
     }
 
+    OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
+        public void onGetGeoCodeResult(GeoCodeResult result) {
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+                //没有检索到结果
+            }
+            //获取地理编码结果
+            double latitude = result.getLocation().latitude;
+            double longitude = result.getLocation().longitude;
+            ToastUtils.ToastShort(getApplicationContext(), "latitude:"+latitude+";longitude"+longitude);
+            mAddress = latitude + "," + longitude + "," + mReqAddress.getText().toString();
+        }
+
+        @Override
+        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+                //没有找到检索结果
+            }
+            //获取反向地理编码结果
+            ToastUtils.ToastShort(getApplicationContext(), result.toString());
+        }
+    };
+
     private void _insertReq() {
         RequestParams params = new RequestParams(Url.INSERT_REQ_URL);
-        params.addBodyParameter("reqAddress", mReqAddress.getText().toString());
+//        params.addBodyParameter("reqAddress", mReqAddress.getText().toString());
+        params.addBodyParameter("reqAddress", mAddress);
         params.addBodyParameter("reqTitle", mReqTitle.getText().toString());
         params.addBodyParameter("reqDesp", mReqDesp.getText().toString());
         params.addBodyParameter("reqComment", mReqComment.getText().toString());

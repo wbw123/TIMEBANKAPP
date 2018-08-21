@@ -111,7 +111,7 @@ public class QueryVolunteerListActivity extends AppCompatActivity implements OnR
 
     private void _processJson(String result) {
         QueryResVolunteer queryResVolunteer = JsonResolveUtils.parseJsonToBean(result, QueryResVolunteer.class);
-        Log.i(TAG, "志愿者json解析：" + queryResVolunteer.toString());
+//        Log.i(TAG, "志愿者json解析：" + queryResVolunteer.toString());
         volunteerBeen = queryResVolunteer.getRows();
         ResQueryVolAdapter resQueryVolAdapter = new ResQueryVolAdapter(this, volunteerBeen);
         mResQueryVolList.setAdapter(resQueryVolAdapter);

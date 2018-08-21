@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTabHost;
@@ -22,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chase.timebank.bean.BottomTabItem;
+import com.chase.timebank.news.NewsActivity;
 import com.chase.timebank.util.ToastUtils;
 
 import butterknife.BindView;
@@ -40,11 +39,7 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
     // 用来计算返回键的点击间隔时间
     private long mExitTime = 0;
 
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-        }
-    };
+    private String userRole;
 
     @Override
     protected int attachLayoutRes() {
@@ -87,6 +82,7 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
         super.initData();
         Intent intent = getIntent();
         String userAccount = intent.getStringExtra("userAccount");
+        userRole = intent.getStringExtra("userRole");
         ToastUtils.ToastShort(this, userAccount + "登录了");
         //设置用户账号
         if (userAccount == null) {
@@ -94,7 +90,10 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
         } else {
             mNavUserAccount.setText(userAccount);
         }
+
     }
+
+
 
 
     private void _initFTH() {
@@ -198,15 +197,32 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_1:
-                Intent intent1 = new Intent(this, InsertRequestActivity.class);
-                startActivity(intent1);
+                if (userRole.equals("Tourist")) {
+                    ToastUtils.ToastLong(this, "请先完善信息，审核通过后执行此操作");
+                } else {
+                    Intent intent1 = new Intent(this, InsertRequestActivity.class);
+                    startActivity(intent1);
+                }
                 break;
             case R.id.nav_2:
                 Intent intent2 = new Intent(this, InsertTransferActivity.class);
                 startActivity(intent2);
                 break;
+            case R.id.nav_3:
+                Intent intent3 = new Intent(this, NewsActivity.class);
+                startActivity(intent3);
+                break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /*public double[] getLatLon() {
+        double[] doubles = new double[2];
+        doubles[0] = this.mLatitude;
+        doubles[1] = this.mLongitude;
+        ToastUtils.ToastShort(getApplicationContext()," latitude:" + mLatitude
+                + " longitude:" + mLongitude);
+        return doubles;
+    }*/
 }

@@ -7,24 +7,36 @@
     android:paddingTop="30dp"
     tools:context="com.chase.timebank.RequestDetailActivity">
 
+    <LinearLayout
+        android:id="@+id/ll_top_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/title_layout" />
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_top_title"
         android:layout_marginBottom="85dp"
         android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/shallow_white_color"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white_color"
                 android:orientation="vertical"
                 android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,222 +54,427 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
+                    android:id="@+id/tv_1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求提出时间:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/req_detail_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="2"
-                        android:text="请求提出地址:"
-                        android:textSize="25sp" />
-
-                    <Button
-                        android:id="@+id/btn_show_map"
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn_login_selector"
-                        android:text="在地图上显示" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/req_detail_addr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:text="请求标题:"
-                    android:textSize="25sp" />
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/req_detail_title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_1"
                     android:ellipsize="end"
+                    android:gravity="center_vertical|right"
                     android:maxLines="2"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:text="搬砖"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
+                    android:id="@+id/tv_2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求描述:"
-                    android:textSize="25sp" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="发布时间:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/req_detail_des"
+                    android:id="@+id/req_detail_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:text="请求补充:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/req_detail_com"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_2"
                     android:ellipsize="end"
-                    android:maxLines="5"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:gravity="center_vertical|right"
+                    android:text="1991-12-02"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:layout_height="1dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求分类:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/req_detail_class"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/relativelayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
+                    android:id="@+id/tv_3"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="服务地址:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btn_show_map"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求可用开始时间:"
-                    android:textSize="25sp" />
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/btn_login_selector"
+                    android:text="在地图上显示" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/req_detail_addr"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:ellipsize="end"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="10dp"
+                android:text="山东省青岛市黄岛区山东科技大学"
+                android:textColor="@color/default_text_color"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="服务开始时间:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/req_detail_ava_start_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_4"
                     android:ellipsize="end"
+                    android:gravity="center_vertical|right"
                     android:maxLines="2"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:text="1991-12-02"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
+                    android:id="@+id/tv_5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求可用结束时间:"
-                    android:textSize="25sp" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="服务结束时间:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/req_detail_ava_end_time"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_5"
                     android:ellipsize="end"
+                    android:gravity="center_vertical|right"
                     android:maxLines="2"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:text="1991-12-02"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="服务类型:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_class"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_6"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:text="唠嗑"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="需要人数:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_7"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:text="5人"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="紧急程度:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_urgency"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_8"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:text="不急"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="批准状态:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_appr_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_9"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:text="通过"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="处理状态:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/req_detail_pro_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/tv_10"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:text="未启动"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="服务描述:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/req_detail_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:ellipsize="end"
+                android:gravity="center_vertical|left"
+                android:maxLines="10"
+                android:paddingLeft="10dp"
+                android:text="山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学"
+                android:textColor="@color/default_text_color"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white_color"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/tv_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="服务补充:"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/req_detail_com"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_color"
+                android:ellipsize="end"
+                android:gravity="center_vertical|left"
+                android:maxLines="10"
+                android:paddingLeft="10dp"
+                android:text="山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学山东省青岛市黄岛区山东科技大学"
+                android:textColor="@color/default_text_color"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -275,123 +492,35 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求需要人数:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/req_detail_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求紧急程度:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/req_detail_urgency"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求批准状态:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/req_detail_appr_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="请求处理状态:"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/req_detail_pro_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/ll_res_addr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <RelativeLayout
+                    android:id="@+id/relativelayout_addr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:layout_height="40dp"
+                    android:background="@color/white_color"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                     <TextView
+                        android:id="@+id/tv_13"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_centerVertical="true"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:text="您的当前地址:"
-                        android:textSize="25sp" />
+                        android:textColor="@color/black_color"
+                        android:textSize="16sp" />
 
                     <Button
                         android:id="@+id/btn_res_location"
                         android:layout_width="180dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentEnd="true"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/btn_login_selector"
                         android:text="自动获取当前位置信息" />
@@ -401,13 +530,20 @@
                 <EditText
                     android:id="@+id/res_addr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@color/white_color"
                     android:ellipsize="end"
-                    android:maxLines="2"
-                    android:hint="请输入您的当前地址"
+                    android:gravity="center_vertical|left"
                     android:paddingLeft="10dp"
-                    android:textSize="20sp" />
+                    android:text="请输入您的当前地址"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
     <!--我的请求 使用-->
@@ -434,8 +570,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:background="@drawable/btn_login_selector"
+                android:enabled="false"
                 android:text="更新请求"
-                android:textColor="#5c5c5c"
+                android:textColor="#665c5c5c"
                 android:textSize="16sp" />
 
             <Button
@@ -445,8 +582,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:background="@drawable/btn_login_selector"
+                android:enabled="false"
                 android:text="撤销"
-                android:textColor="#5c5c5c"
+                android:textColor="#665c5c5c"
                 android:textSize="16sp" />
 
             <Button
@@ -456,8 +594,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:background="@drawable/btn_login_selector"
+                android:enabled="false"
                 android:text="启动"
-                android:textColor="#5c5c5c"
+                android:textColor="#665c5c5c"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -475,8 +614,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:background="@drawable/btn_login_selector"
+                android:enabled="false"
                 android:text="查看志愿者"
-                android:textColor="#5c5c5c"
+                android:textColor="#665c5c5c"
                 android:textSize="16sp" />
 
             <Button
@@ -486,8 +626,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:background="@drawable/btn_login_selector"
+                android:enabled="false"
                 android:text="已完成"
-                android:textColor="#5c5c5c"
+                android:textColor="#665c5c5c"
                 android:textSize="16sp" />
 
             <Button
@@ -497,8 +638,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:background="@drawable/btn_login_selector"
+                android:enabled="false"
                 android:text="未完成"
-                android:textColor="#5c5c5c"
+                android:textColor="#665c5c5c"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
@@ -521,8 +663,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="@drawable/btn_login_selector"
+            android:enabled="false"
             android:text="申请服务"
-            android:textColor="#5c5c5c"
+            android:textColor="#665c5c5c"
             android:textSize="16sp" />
 
         <Button

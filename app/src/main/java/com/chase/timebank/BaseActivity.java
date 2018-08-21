@@ -31,6 +31,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
+
+
     /**
      * 绑定布局文件
      *

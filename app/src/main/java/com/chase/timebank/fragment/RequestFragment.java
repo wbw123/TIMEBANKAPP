@@ -17,7 +17,7 @@ import com.chase.timebank.view.CustomViewPager;
  * 更新描述   ${TODO}
  */
 public class RequestFragment extends BaseFragment {
-    private final String[] requestTitle = {"服务列表", "我的请求", "我的服务"};
+    private final String[] requestTitle = {"最新需求","附近需求", "我的需求", "我的服务"};
     @Override
     public View initView() {
         View view = View.inflate(mActivity, R.layout.fragment_request, null);

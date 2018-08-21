@@ -90,6 +90,13 @@
                     android:maxLines="3"
                     android:paddingLeft="10dp"
                     android:textSize="20sp" />
+                <Button
+                    android:id="@+id/btn_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="检验地址是否可以查询到"
+                    android:textSize="16sp"
+                    />
             </LinearLayout>
 
             <LinearLayout

@@ -9,6 +9,7 @@
     tools:context="com.chase.timebank.LoginActivity">
 
     <Button
+        android:visibility="invisible"
         android:id="@+id/btn_skip"
         android:layout_width="60dp"
         android:layout_height="30dp"

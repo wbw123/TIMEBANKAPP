@@ -2,6 +2,7 @@ package com.chase.timebank;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,6 +40,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RequestDetailActivity extends AppCompatActivity {
+    /*标题*/
+    @BindView(R.id.iv_back)
+    ImageView mIvBack;
+    @BindView(R.id.tv_title)
+    TextView mTvTitle;
+    /*内容*/
     @BindView(R.id.req_detail_id)
     TextView mReqDetailID;
     @BindView(R.id.req_detail_time)
@@ -156,6 +164,10 @@ public class RequestDetailActivity extends AppCompatActivity {
             Log.i(TAG, resultModel.getMsg());
             ToastUtils.ToastLong(getApplicationContext(), resultModel.getMsg());
             finish();
+        } else if (resultModel.getCode() == 11) {
+            ToastUtils.ToastLong(getApplicationContext(), resultModel.getMsg());
+        } else if (resultModel.getCode() == 12) {
+            ToastUtils.ToastLong(getApplicationContext(), resultModel.getMsg());
         } else {
             Log.i(TAG, "数据库更新失败！");
             ToastUtils.ToastLong(getApplicationContext(), "数据库异常，请稍后重试！");
@@ -169,6 +181,8 @@ public class RequestDetailActivity extends AppCompatActivity {
         initBDloaction();
         setContentView(R.layout.activity_request_detail);
         ButterKnife.bind(this);
+        mTvTitle.setText("订单详情");
+        mIvBack.setVisibility(View.VISIBLE);
         initData();
         initView();
     }
@@ -179,15 +193,51 @@ public class RequestDetailActivity extends AppCompatActivity {
         String resAddr = getIntent().getStringExtra("res_addr");
         resGuid = getIntent().getStringExtra("res_guid");
         Log.i(TAG, "=======================" + resAddr);
+        String reqTypeApproveStatus = mReqMyData.getReqTypeApproveStatus();
+        String reqTypeGuidProcessStatus = mReqMyData.getReqTypeGuidProcessStatus();
         if (intExtra == 1) {
             mLlSerList.setVisibility(View.VISIBLE);
             mLlResAddr.setVisibility(View.VISIBLE);
             mLlReqMy.setVisibility(View.GONE);
+            if (reqTypeApproveStatus.equals("通过") && reqTypeGuidProcessStatus.equals("待启动")) {
+                mReqApplyService.setEnabled(true);
+                mReqApplyService.setTextColor(Color.parseColor("#5c5c5c"));
+            }
         } else if (intExtra == 3) {
             mLlSerMy.setVisibility(View.VISIBLE);
             mLlResAddr.setVisibility(View.VISIBLE);
             mResAddr.setText(resAddr);//已经写过一次地址了，自然要写上
             mLlReqMy.setVisibility(View.GONE);
+        } else if (intExtra == 2) {
+
+            if (!reqTypeGuidProcessStatus.equals("撤销")) {
+                if (reqTypeApproveStatus.equals("待审核")) {
+                    mReqDetailUpdate.setEnabled(true);
+                    mReqDetailCancel.setEnabled(true);
+                    mReqDetailUpdate.setTextColor(Color.parseColor("#5c5c5c"));
+                    mReqDetailCancel.setTextColor(Color.parseColor("#5c5c5c"));
+                } else if (reqTypeApproveStatus.equals("驳回")) {
+                    mReqDetailCancel.setEnabled(true);
+                    mReqDetailUpdate.setTextColor(Color.parseColor("#5c5c5c"));
+                } else if (reqTypeApproveStatus.equals("通过")) {
+                    mReqDetailUpdate.setEnabled(true);
+                    mReqDetailCancel.setEnabled(true);
+                    mReqDetailQueryVol.setEnabled(true);
+                    mReqDetailUpdate.setTextColor(Color.parseColor("#5c5c5c"));
+                    mReqDetailCancel.setTextColor(Color.parseColor("#5c5c5c"));
+                    mReqDetailQueryVol.setTextColor(Color.parseColor("#5c5c5c"));
+                    if (reqTypeGuidProcessStatus.equals("待启动")) {
+                        mReqDetailStart.setEnabled(true);
+                        mReqDetailStart.setTextColor(Color.parseColor("#5c5c5c"));
+                    } else if (reqTypeGuidProcessStatus.equals("启动")) {
+                        mReqDetailComplete.setEnabled(true);
+                        mReqDetailIncomplete.setEnabled(true);
+                        mReqDetailComplete.setTextColor(Color.parseColor("#5c5c5c"));
+                        mReqDetailIncomplete.setTextColor(Color.parseColor("#5c5c5c"));
+                    }
+                }
+            }
+
         }
     }
 
@@ -222,7 +272,7 @@ public class RequestDetailActivity extends AppCompatActivity {
 
     @OnClick({R.id.req_detail_update, R.id.req_detail_cancel, R.id.req_detail_start, R.id.req_detail_query_vol
             , R.id.req_detail_complete, R.id.req_detail_incomplete, R.id.req_apply_service, R.id.req_back
-            , R.id.res_update, R.id.res_back,R.id.btn_show_map,R.id.btn_res_location})
+            , R.id.res_update, R.id.res_back, R.id.btn_show_map, R.id.btn_res_location})
     public void clickCase(View view) {
         switch (view.getId()) {
             case R.id.req_detail_update:
@@ -271,11 +321,14 @@ public class RequestDetailActivity extends AppCompatActivity {
             //服务列表 我的请求 我的服务
             case R.id.btn_show_map:
                 Log.i(TAG, "跳到百度地图页面");
-                startActivity(new Intent(this,BDMapActivity.class));
+                startActivity(new Intent(this, BDMapActivity.class));
+                break;
+            //顶部返回图片按钮
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }
-
 
 
     private void _updateReqProcess(String url, final int what) {
@@ -336,7 +389,8 @@ public class RequestDetailActivity extends AppCompatActivity {
     /*百度地图自动定位*/
     private LocationClient mLocationClient;
     private MyBDLocationListener mBDLocationListener;
-        private void initBDloaction() {
+
+    private void initBDloaction() {
         mLocationClient = new LocationClient(this);
         mBDLocationListener = new MyBDLocationListener();
         mLocationClient.registerLocationListener(mBDLocationListener);

@@ -5,8 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.chase.timebank.fragment.detail.ServiceListFragment;
+import com.chase.timebank.fragment.detail.NewListFragment;
 import com.chase.timebank.fragment.detail.RequestMyFragment;
+import com.chase.timebank.fragment.detail.ServiceListFragment;
 import com.chase.timebank.fragment.detail.ServiceMyFragment;
 
 /**
@@ -15,6 +16,7 @@ import com.chase.timebank.fragment.detail.ServiceMyFragment;
 
 public class RequestAdapter extends FragmentPagerAdapter {
     String[] _title;
+    private NewListFragment newListFragment;
     private ServiceListFragment serviceListFragment;
     private RequestMyFragment requestMyFragment;
     private ServiceMyFragment serviceMyFragment;
@@ -37,6 +39,14 @@ public class RequestAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+                if (newListFragment == null) {
+                    newListFragment = new NewListFragment();
+                    Bundle bundle0 = new Bundle();
+                    bundle0.putString("newListFragment",_title[0]);
+                    newListFragment.setArguments(bundle0);
+                }
+                return newListFragment;
+            case 1:
                 if (serviceListFragment == null) {
                     serviceListFragment = new ServiceListFragment();
                     Bundle bundle0 = new Bundle();
@@ -44,7 +54,7 @@ public class RequestAdapter extends FragmentPagerAdapter {
                     serviceListFragment.setArguments(bundle0);
                 }
                 return serviceListFragment;
-            case 1:
+            case 2:
                 if (requestMyFragment == null) {
                     requestMyFragment = new RequestMyFragment();
                     Bundle bundle1 = new Bundle();
@@ -52,7 +62,7 @@ public class RequestAdapter extends FragmentPagerAdapter {
                     requestMyFragment.setArguments(bundle1);
                 }
                 return requestMyFragment;
-            case 2:
+            case 3:
                 if (serviceMyFragment == null) {
                     serviceMyFragment = new ServiceMyFragment();
                     Bundle bundle2 = new Bundle();
