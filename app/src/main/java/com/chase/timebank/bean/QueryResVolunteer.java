@@ -67,6 +67,8 @@ public class QueryResVolunteer implements Serializable{
         private String resEvaluate;
         private String resEarnCurrency;
         private String resProcessUserGuid;
+        private String resReqTitle;
+        private String resReqAddr;
 
         @Override
         public String toString() {
@@ -82,6 +84,8 @@ public class QueryResVolunteer implements Serializable{
                     ", resEvaluate='" + resEvaluate + '\'' +
                     ", resEarnCurrency='" + resEarnCurrency + '\'' +
                     ", resProcessUserGuid='" + resProcessUserGuid + '\'' +
+                    ", resReqTitle='" + resReqTitle + '\'' +
+                    ", resReqAddr='" + resReqAddr + '\'' +
                     '}';
         }
 
@@ -171,6 +175,21 @@ public class QueryResVolunteer implements Serializable{
 
         public void setResProcessUserGuid(String resProcessUserGuid) {
             this.resProcessUserGuid = resProcessUserGuid;
+        }
+        public String getResReqTitle() {
+            return resReqTitle;
+        }
+
+        public void setResReqTitle(String resReqTitle) {
+            this.resReqTitle = resReqTitle;
+        }
+
+        public String getResReqAddr() {
+            return resReqAddr;
+        }
+
+        public void setResReqAddr(String resReqAddr) {
+            this.resReqAddr = resReqAddr;
         }
     }
 }

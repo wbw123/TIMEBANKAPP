@@ -1,6 +1,7 @@
 package com.chase.timebank;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +19,10 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -113,6 +117,9 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     TextView mTvUserBirth;
     @BindView(R.id.tv_edituserPCA)
     TextView mTvUserPCA;
+    //身份认证
+    @BindView(R.id.iv_idimage_example)
+    ImageView mIdimageExample;
 
     @BindView(R.id.cb_register_agree)
     CheckBox mCbAgree;
@@ -140,6 +147,7 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     public static final int REQUEST_CODE_PERMISSION_CAMERA = 105;
     //相机相册底部弹窗dialog
     private BottomDialog bottomDialog;
+    private Dialog mDialog;
 
     /*handler弱引用----------------------------------------start*/
     private static class UserInfoEditHandler extends Handler {
@@ -222,7 +230,36 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
             }
         }.start();
         initGender();//初始化性别spinner
-        getUserInfoFromServer();//联网获取数据
+        //图片点击放大弹窗
+        ImageDialog();
+        //联网获取数据
+        getUserInfoFromServer();
+
+    }
+
+    private void ImageDialog() {
+        mDialog = new Dialog(this, R.style.MyDialog);
+        mDialog.setContentView(R.layout.dialog_idimage);
+        ImageView imageView = mDialog.findViewById(R.id.imageview);
+//        imageView.setBackgroundResource(R.mipmap.examp_idimage);
+        //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
+        mDialog.setCanceledOnTouchOutside(true);
+        WindowManager m = getWindow().getWindowManager();
+        Display d = m.getDefaultDisplay();
+        Window w = mDialog.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.width = d.getWidth();
+        w.setAttributes(lp);
+//        lp.x = 20;
+//        lp.y = 60;
+//        mDialog.onWindowAttributesChanged(lp);
+        imageView.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mDialog.dismiss();
+                    }
+                });
 
     }
 
@@ -374,7 +411,7 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     }
 
     @OnClick({R.id.tv_edituserBirthdate, R.id.tv_edituserPCA, R.id.iv_back,
-            R.id.tv_right, R.id.tv_protocol, R.id.iv_camera})
+            R.id.tv_right, R.id.tv_protocol, R.id.iv_camera,R.id.iv_idimage_example})
     public void clickCase(View view) {
         switch (view.getId()) {
             case R.id.tv_edituserBirthdate:
@@ -416,6 +453,10 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
             case R.id.iv_camera:
 //                showPhotoSelectDialog();
                 bottomDialog.show();
+                break;
+
+            case R.id.iv_idimage_example:
+                mDialog.show();
                 break;
         }
 

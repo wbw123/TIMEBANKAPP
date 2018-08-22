@@ -73,8 +73,8 @@ public class BDNavActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //获取服务订单位置数据
         Intent intent = getIntent();
-        Float latitude = intent.getFloatExtra("service_my_latitude",39.920884f);
-        Float longitude = intent.getFloatExtra("service_my_longitude",116.408042f);
+        Float latitude = intent.getFloatExtra("service_my_latitude",0);
+        Float longitude = intent.getFloatExtra("service_my_longitude",0);
         String locationName = intent.getStringExtra("service_my_location_name");
         mEndLocBean = new LocationBean(latitude,longitude,locationName);
         mDestLocationData = new LatLng(latitude, longitude);//终点经纬度

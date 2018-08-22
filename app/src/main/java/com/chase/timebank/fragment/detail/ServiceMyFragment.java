@@ -210,10 +210,13 @@ public class ServiceMyFragment extends BaseFragment implements OnRefreshListener
                 break;
             case R.id.res_my_nav:
                 Intent intent = new Intent(mActivity, BDNavActivity.class);
-                //TODO:这里intent传递的是服务订单位置数据（经度，纬度，名称），先用模拟数据代替
-                intent.putExtra("service_my_latitude", 36.089283f);
-                intent.putExtra("service_my_longitude", 120.360083f);
-                intent.putExtra("service_my_location_name", "青岛台东");
+                //TODO:这里intent传递的是服务订单位置数据（纬度，经度，名称），先用模拟数据代替
+//                "36.022914146409775,120.12915616792814,黄岛区辛安派出所"
+                String resReqAddr = mRows.get(position).getResReqAddr();
+                String[] splits = resReqAddr.split(",");
+                intent.putExtra("service_my_latitude", Float.valueOf(splits[0]));
+                intent.putExtra("service_my_longitude", Float.valueOf(splits[1]));
+                intent.putExtra("service_my_location_name", splits[2]);
                 startActivity(intent);
                 break;
         }

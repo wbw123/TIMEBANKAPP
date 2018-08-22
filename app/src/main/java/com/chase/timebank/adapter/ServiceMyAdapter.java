@@ -57,7 +57,10 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
         if (endTime != null) {
             availEndTime = DateJsonFormatUtil.longToDate(Long.valueOf(endTime));
         }
-        holder.ResMySerTitle.setText("服务标题：" + mDatas.get(position).getResAcceptAddress());
+        String resReqAddr = mDatas.get(position).getResReqAddr();
+        String[] split = resReqAddr.split(",");
+        holder.ResMySerTitle.setText("服务标题：" + mDatas.get(position).getResReqTitle());
+        holder.ResMySerAddr.setText("服务地址：" + split[2]);
         holder.ResMyAcceptTime.setText("接收时间：" + availAcceptTime);
         holder.ResMyStartEndTime.setText("从 " + availStartTime + " 到 " + availEndTime);
         holder.ResMyProcess.setText("处理状态：" + resTypeGuidProcessStatus);
@@ -136,6 +139,7 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
 
     class MyHolder extends RecyclerView.ViewHolder {
         private TextView ResMySerTitle;
+        private TextView ResMySerAddr;
         private TextView ResMyAcceptTime;
         private TextView ResMyStartEndTime;
         private TextView ResMyProcess;
@@ -147,6 +151,7 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
         public MyHolder(View itemView) {
             super(itemView);
             ResMySerTitle = itemView.findViewById(R.id.res_my_service_title);
+            ResMySerAddr = itemView.findViewById(R.id.res_my_service_addr);
             ResMyAcceptTime = itemView.findViewById(R.id.res_my_accept_time);
             ResMyStartEndTime = itemView.findViewById(R.id.res_my_start_end_time);
             ResMyProcess = itemView.findViewById(R.id.res_my_process);
