@@ -44,6 +44,7 @@ import com.chase.timebank.dialog.BottomDialog;
 import com.chase.timebank.dialog.MyDialog;
 import com.chase.timebank.global.Constant;
 import com.chase.timebank.global.Url;
+import com.chase.timebank.others.ScaleView;
 import com.chase.timebank.util.CropImageUtils;
 import com.chase.timebank.util.GlobalVariables;
 import com.chase.timebank.util.JsonResolveUtils;
@@ -240,7 +241,7 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     private void ImageDialog() {
         mDialog = new Dialog(this, R.style.MyDialog);
         mDialog.setContentView(R.layout.dialog_idimage);
-        ImageView imageView = mDialog.findViewById(R.id.imageview);
+        ScaleView imageView = mDialog.findViewById(R.id.imageview);
 //        imageView.setBackgroundResource(R.mipmap.examp_idimage);
         //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
         mDialog.setCanceledOnTouchOutside(true);
