@@ -535,7 +535,7 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical|left"
                     android:paddingLeft="10dp"
-                    android:text="请输入您的当前地址"
+                    android:hint="请输入您的当前地址"
                     android:textColor="@color/default_text_color"
                     android:textSize="16sp" />
 

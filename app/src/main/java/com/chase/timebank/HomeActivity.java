@@ -1,6 +1,8 @@
 package com.chase.timebank;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,9 +23,14 @@ import android.widget.Toast;
 
 import com.chase.timebank.bean.BottomTabItem;
 import com.chase.timebank.news.NewsActivity;
+import com.chase.timebank.util.GlobalVariables;
+import com.chase.timebank.util.SpUtil;
 import com.chase.timebank.util.ToastUtils;
 
+import java.io.File;
+
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends BaseActivity implements View.OnTouchListener, TabHost.OnTabChangeListener, View.OnClickListener ,NavigationView.OnNavigationItemSelectedListener{
     @BindView(R.id.nav_view)
@@ -34,6 +41,7 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
     DrawerLayout mDrawerLayout;
     private static final String TAG = "HomeActivity";
 
+    private CircleImageView mNavUserAvatar;
     private TextView mNavUserAccount;
     private LinearLayout mNavHeader;
     // 用来计算返回键的点击间隔时间
@@ -70,6 +78,8 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
         //获取NavigationView中的header View
         /*这里是个大坑 记得把xml中app:headerLayout删除 别用黄油刀 坑死我了*/
         View headerView = mNavView.inflateHeaderView(R.layout.nav_header_home);
+        //获取view
+        mNavUserAvatar = headerView.findViewById(R.id.nav_user_pic);
         mNavUserAccount = headerView.findViewById(R.id.nav_userAccount);
         mNavHeader = headerView.findViewById(R.id.nav_header);
         mNavHeader.setOnClickListener(this);
@@ -91,9 +101,9 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
             mNavUserAccount.setText(userAccount);
         }
 
+        //从本地获取用户头像
+        showIcon();
     }
-
-
 
 
     private void _initFTH() {
@@ -217,12 +227,27 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
         return true;
     }
 
-    /*public double[] getLatLon() {
-        double[] doubles = new double[2];
-        doubles[0] = this.mLatitude;
-        doubles[1] = this.mLongitude;
-        ToastUtils.ToastShort(getApplicationContext()," latitude:" + mLatitude
-                + " longitude:" + mLongitude);
-        return doubles;
-    }*/
+    //从本地获取用户头像
+    private void showIcon() {
+        //显示用户头像
+        String avatar_path = SpUtil.getString(this, GlobalVariables.USER_AVATAR_FILE_PATH);
+        if (avatar_path != null && isFileExist(avatar_path)) {
+            Bitmap bitmap = BitmapFactory.decodeFile(avatar_path);
+            mNavUserAvatar.setImageBitmap(bitmap);
+        }
+    }
+    public static boolean isFileExist(String icon_path) {
+        File file = new File(icon_path);
+        if (file.exists()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart");
+        showIcon();
+    }
 }

@@ -63,6 +63,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //动态权限
     compile 'com.yanzhenjie:permission:1.0.8'
+    //ratingbar
     testCompile 'junit:junit:4.12'
     compile project(':onsdk_all')
     compile project(':NaviTts')

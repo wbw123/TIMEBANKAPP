@@ -82,7 +82,15 @@
                         android:layout_alignParentEnd="true" />
                 </RelativeLayout>
 
-                <EditText
+                <!--<EditText
+                    android:id="@+id/et_req_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入服务地址(至少精确到小区、村)"
+                    android:maxLines="3"
+                    android:paddingLeft="10dp"
+                    android:textSize="20sp" />-->
+                <AutoCompleteTextView
                     android:id="@+id/et_req_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,8 +101,9 @@
                 <Button
                     android:id="@+id/btn_check"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="检验地址是否可以查询到"
+                    android:layout_height="30dp"
+                    android:text="跳转到百度地图页面，确认地址准确性"
+                    android:background="@drawable/btn_login_selector"
                     android:textSize="16sp"
                     />
             </LinearLayout>

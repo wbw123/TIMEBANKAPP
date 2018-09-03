@@ -1,6 +1,8 @@
 package com.chase.timebank;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,19 +15,26 @@ import android.widget.TextView;
 
 import com.chase.timebank.bean.Users;
 import com.chase.timebank.global.Url;
+import com.chase.timebank.util.GlobalVariables;
 import com.chase.timebank.util.JsonResolveUtils;
+import com.chase.timebank.util.SpUtil;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserInfoActivity extends AppCompatActivity {
+
+    @BindView(R.id.iv_head_picture)
+    CircleImageView mUserAvatar;
     @BindView(R.id.tv_userAccount)
     TextView mUserAccount;
     @BindView(R.id.tv_role)
@@ -85,9 +94,37 @@ public class UserInfoActivity extends AppCompatActivity {
         mIvBack.setVisibility(View.VISIBLE);
         //页标题
         mTvTitle.setText("个人资料");
+        //本地读取用户头像
+        showIcon();
         //联网获取userinfo
         getUserInfoFromServer();
     }
+
+    /*从完善信息页面返回走此方法*/
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //本地读取用户头像
+        showIcon();
+    }
+
+    //从本地获取
+    private void showIcon() {
+        //显示用户头像
+        String avatar_path = SpUtil.getString(this, GlobalVariables.USER_AVATAR_FILE_PATH);
+        if (avatar_path != null && isFileExist(avatar_path)) {
+            Bitmap bitmap = BitmapFactory.decodeFile(avatar_path);
+            mUserAvatar.setImageBitmap(bitmap);
+        }
+    }
+    public static boolean isFileExist(String icon_path) {
+        File file = new File(icon_path);
+        if (file.exists()) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

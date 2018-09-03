@@ -56,10 +56,14 @@ public class RequestMyAdapter extends RecyclerView.Adapter<RequestMyAdapter.MyHo
             issueTime = DateJsonFormatUtil.longToDate(Long.valueOf(issTime));
         }
         String reqAddress = mDatas.get(position).getReqAddress();
-        String[] split = reqAddress.split(",");
+        if (reqAddress != null) {
+            String[] split = reqAddress.split(",");
+            holder.ReqMyAddr.setText("地址：" + split[2]);
+        } else {
+            holder.ReqMyAddr.setText("地址：" + reqAddress);
+        }
         holder.ReqMyTitle.setText(mDatas.get(position).getReqTitle());
         holder.ReqMyNum.setText("需 " + mDatas.get(position).getReqPersonNum() + " 人");
-        holder.ReqMyAddr.setText("地址：" + split[2]);
         holder.ReqMyClass.setText("分类：" + mDatas.get(position).getReqTypeGuidClass());
         holder.ReqMyStartEndTime.setText("从 " + availStartTime + " 到 " + availEndTime);
         holder.ReqMyIssueTime.setText("时间：" + issueTime);

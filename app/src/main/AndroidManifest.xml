@@ -87,6 +87,9 @@
         </provider>
 
         <activity android:name=".news.NewsActivity"></activity>
+        <activity android:name=".ReqMapActivity"></activity>
+        <activity android:name=".TransferPasswordEditActivity"></activity>
+        <activity android:name=".TransferPasswordActivity"></activity>
     </application>
 
 </manifest>

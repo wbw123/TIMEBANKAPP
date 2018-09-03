@@ -44,8 +44,8 @@ import com.chase.timebank.dialog.BottomDialog;
 import com.chase.timebank.dialog.MyDialog;
 import com.chase.timebank.global.Constant;
 import com.chase.timebank.global.Url;
-import com.chase.timebank.others.ScaleView;
 import com.chase.timebank.util.CropImageUtils;
+import com.chase.timebank.util.DateJsonFormatUtil;
 import com.chase.timebank.util.GlobalVariables;
 import com.chase.timebank.util.JsonResolveUtils;
 import com.chase.timebank.util.LogUtils;
@@ -86,13 +86,21 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     TextView mTvTitle;
     @BindView(R.id.tv_right)
     TextView mTvSave;
-
-    /*控件*/
+    /*传用户头像*/
     @BindView(R.id.iv_head_picture)
     CircleImageView mIvHeadPic;
     @BindView(R.id.iv_camera)
     ImageView mIvCamera;
+    /*传身份证照片*/
+    @BindView(R.id.iv_idimage_example)
+    ImageView mIdimageExample;
+    @BindView(R.id.iv_idimage_user)
+    ImageView mIdimageUser;
+    @BindView(R.id.iv_id_camera)
+    ImageView mIvIdCamera;
 
+
+    /*控件*/
     @BindView(R.id.sp_gender)
     Spinner mSpGender;
     @BindView(R.id.sp_com)
@@ -118,9 +126,7 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     TextView mTvUserBirth;
     @BindView(R.id.tv_edituserPCA)
     TextView mTvUserPCA;
-    //身份认证
-    @BindView(R.id.iv_idimage_example)
-    ImageView mIdimageExample;
+
 
     @BindView(R.id.cb_register_agree)
     CheckBox mCbAgree;
@@ -148,7 +154,9 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     public static final int REQUEST_CODE_PERMISSION_CAMERA = 105;
     //相机相册底部弹窗dialog
     private BottomDialog bottomDialog;
-    private Dialog mDialog;
+    private Dialog mDialog;//图片放大dialog
+    //判断是头像上传还是身份信息
+    private String avatarOrIdimage;
 
     /*handler弱引用----------------------------------------start*/
     private static class UserInfoEditHandler extends Handler {
@@ -241,7 +249,7 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     private void ImageDialog() {
         mDialog = new Dialog(this, R.style.MyDialog);
         mDialog.setContentView(R.layout.dialog_idimage);
-        ScaleView imageView = mDialog.findViewById(R.id.imageview);
+        ImageView imageView = mDialog.findViewById(R.id.imageview);
 //        imageView.setBackgroundResource(R.mipmap.examp_idimage);
         //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
         mDialog.setCanceledOnTouchOutside(true);
@@ -271,7 +279,13 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
         mUserMail.setText(users.getUserMail());
         mUserPhone.setText(users.getUserPhone());
         mUserIdNum.setText(users.getUserIdnum());
-        mTvUserBirth.setText(users.getUserBirthdate());
+        String userBirthdate = users.getUserBirthdate();
+        if (userBirthdate != null) {
+            String birthDate = DateJsonFormatUtil.longToBirthDate(Long.valueOf(userBirthdate));
+            mTvUserBirth.setText(birthDate);
+        } else {
+            mTvUserBirth.setText(userBirthdate);
+        }
         mUserEmerPerson.setText(users.getUserEmerperson());
         mUserEmerContact.setText(users.getUserEmercontact());
         mTvUserPCA.setText(users.getUserProvince() + "-" + users.getUserCity() + "-" + users.getUserDistrict());
@@ -412,7 +426,8 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     }
 
     @OnClick({R.id.tv_edituserBirthdate, R.id.tv_edituserPCA, R.id.iv_back,
-            R.id.tv_right, R.id.tv_protocol, R.id.iv_camera,R.id.iv_idimage_example})
+            R.id.tv_right, R.id.tv_protocol, R.id.iv_camera, R.id.iv_idimage_example,
+            R.id.iv_idimage_user, R.id.iv_id_camera})
     public void clickCase(View view) {
         switch (view.getId()) {
             case R.id.tv_edituserBirthdate:
@@ -440,6 +455,7 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
                 break;
             case R.id.tv_right:
                 if (mCbAgree.isChecked()) {
+                    ToastUtils.ToastShort(this, "保存");
                     saveUserInfo();
                 } else {
                     ToastUtils.ToastShort(this, "请先同意《用户协议》！");
@@ -453,10 +469,15 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
 
             case R.id.iv_camera:
 //                showPhotoSelectDialog();
+                avatarOrIdimage = "avatar";
                 bottomDialog.show();
                 break;
-
+            case R.id.iv_id_camera:
+                avatarOrIdimage = "idimage";
+                bottomDialog.show();
+                break;
             case R.id.iv_idimage_example:
+            case R.id.iv_idimage_user:
                 mDialog.show();
                 break;
         }
@@ -522,6 +543,7 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
         params.addBodyParameter("userProvince", splitPCA[0]);
         params.addBodyParameter("userCity", splitPCA[1]);
         params.addBodyParameter("userDistrict", splitPCA[2]);
+//        params.addBodyParameter("birth", mTvUserBirth.getText().toString());
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -593,11 +615,18 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     //从本地获取
     private void showIcon() {
         //显示用户头像
-        String icon_path = SpUtil.getString(this, GlobalVariables.USER_ICON_FILE_PATH);
-        if (icon_path != null && isFileExist(icon_path)) {
-            Bitmap bitmap = BitmapFactory.decodeFile(icon_path);
+        String avatar_path = SpUtil.getString(this, GlobalVariables.USER_AVATAR_FILE_PATH);
+        if (avatar_path != null && isFileExist(avatar_path)) {
+            Bitmap bitmap = BitmapFactory.decodeFile(avatar_path);
             mIvHeadPic.setImageBitmap(bitmap);
         }
+        //显示用户身份照片
+        String idimage_path = SpUtil.getString(this, GlobalVariables.USER_IDIMAGE_FILE_PATH);
+        if (idimage_path != null && isFileExist(idimage_path)) {
+            Bitmap bitmap = BitmapFactory.decodeFile(idimage_path);
+            mIdimageUser.setImageBitmap(bitmap);
+        }
+
     }
 
     @Override
@@ -711,7 +740,6 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
             public void cropPictureFinish(String path) {
                 LogUtils.d("path", path + " .....");
                 //TODO 上传图片
-                SpUtil.putString(UserInfoEditActivity.this, GlobalVariables.USER_ICON_FILE_PATH, path);
                 upload(path);
             }
 
@@ -719,9 +747,17 @@ public class UserInfoEditActivity extends AppCompatActivity implements BottomDia
     }
 
     private void upload(String path) {
-        RequestParams params = new RequestParams(Url.IMAGE_UPLOAD_URL);
+        RequestParams params = null;
+        if (avatarOrIdimage.equals("avatar")) {
+            params = new RequestParams(Url.AVATAR_UPLOAD_URL);
+            params.addBodyParameter("userAvatar", new File(path), "multipart/form-data");
+            SpUtil.putString(UserInfoEditActivity.this, GlobalVariables.USER_AVATAR_FILE_PATH, path);
+        } else if (avatarOrIdimage.equals("idimage")) {
+            params = new RequestParams(Url.IDIMAGE_UPLOAD_URL);
+            params.addBodyParameter("userIdimage", new File(path), "multipart/form-data");
+            SpUtil.putString(UserInfoEditActivity.this, GlobalVariables.USER_IDIMAGE_FILE_PATH, path);
+        }
         params.setMultipart(true);//设置表单传送
-        params.addBodyParameter("userIdimage", new File(path),"multipart/form-data");
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

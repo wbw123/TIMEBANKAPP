@@ -58,9 +58,13 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
             availEndTime = DateJsonFormatUtil.longToDate(Long.valueOf(endTime));
         }
         String resReqAddr = mDatas.get(position).getResReqAddr();
-        String[] split = resReqAddr.split(",");
+        if (resReqAddr != null) {
+            String[] split = resReqAddr.split(",");
+            holder.ResMySerAddr.setText("服务地址：" + split[2]);
+        } else {
+            holder.ResMySerAddr.setText("服务地址：" + resReqAddr);
+        }
         holder.ResMySerTitle.setText("服务标题：" + mDatas.get(position).getResReqTitle());
-        holder.ResMySerAddr.setText("服务地址：" + split[2]);
         holder.ResMyAcceptTime.setText("接收时间：" + availAcceptTime);
         holder.ResMyStartEndTime.setText("从 " + availStartTime + " 到 " + availEndTime);
         holder.ResMyProcess.setText("处理状态：" + resTypeGuidProcessStatus);
@@ -78,7 +82,7 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
             @Override
             public void onClick(View v) {
                 if (mOnButtonClickListener != null) {
-                    mOnButtonClickListener.onBtnclick(v,position);
+                    mOnButtonClickListener.onBtnclick(v, position);
                 }
             }
         });
@@ -86,7 +90,7 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
             @Override
             public void onClick(View v) {
                 if (mOnButtonClickListener != null) {
-                    mOnButtonClickListener.onBtnclick(v,position);
+                    mOnButtonClickListener.onBtnclick(v, position);
                 }
             }
         });
@@ -94,7 +98,7 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
             @Override
             public void onClick(View v) {
                 if (mOnButtonClickListener != null) {
-                    mOnButtonClickListener.onBtnclick(v,position);
+                    mOnButtonClickListener.onBtnclick(v, position);
                 }
             }
         });
@@ -110,31 +114,36 @@ public class ServiceMyAdapter extends RecyclerView.Adapter<ServiceMyAdapter.MyHo
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
             //注意这里使用getTag方法获取数据
-            mOnItemClickListener.onItemClick(v,(ArrayList<VolunteerBean>)v.getTag());
+            mOnItemClickListener.onItemClick(v, (ArrayList<VolunteerBean>) v.getTag());
         }
     }
+
     public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, ArrayList<VolunteerBean> data);
     }
+
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
     /*button点击事件*/
+
     /**
      * 按钮点击事件对应的接口
      */
-    public interface ButtonInterface{
+    public interface ButtonInterface {
         void onBtnclick(View view, int position);
     }
-    private ButtonInterface mOnButtonClickListener = null;
-    /**
-     *按钮点击事件需要的方法
-     */
-    public void setOnButtonClickListener(ButtonInterface buttonInterface){
-        this.mOnButtonClickListener=buttonInterface;
-    }
 
+    private ButtonInterface mOnButtonClickListener = null;
+
+    /**
+     * 按钮点击事件需要的方法
+     */
+    public void setOnButtonClickListener(ButtonInterface buttonInterface) {
+        this.mOnButtonClickListener = buttonInterface;
+    }
 
 
     class MyHolder extends RecyclerView.ViewHolder {

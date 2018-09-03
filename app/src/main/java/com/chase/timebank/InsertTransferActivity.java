@@ -1,5 +1,6 @@
 package com.chase.timebank;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -42,15 +43,23 @@ public class InsertTransferActivity extends AppCompatActivity {
             //解析json数据
             ResultModel resultModel = JsonResolveUtils.parseJsonToBean(result, ResultModel.class);
             Log.i(TAG, "json解析：" + resultModel.toString());
-            if (resultModel.getCode() == 1) {
-                Log.i(TAG, resultModel.getMsg());
-                finish();
-            }else {
-                Log.i(TAG, "汇款提交失败！");
-                ToastUtils.ToastLong(getApplicationContext(),"数据库异常，请稍后重试！");
+
+            switch (resultModel.getCode()) {
+                case 21://请先设置支付密码
+                    ToastUtils.ToastShort(getApplicationContext(), resultModel.getMsg());
+                    startActivity(new Intent(InsertTransferActivity.this, TransferPasswordEditActivity.class));
+                    break;
+                case 22://跳转到输入支付密码页面
+                    Intent intent = new Intent(InsertTransferActivity.this, TransferPasswordActivity.class);
+                    intent.putExtra("transToUserAccount", mTranAccount.getText().toString());
+                    intent.putExtra("transCurrency", mTranNum.getText().toString());
+                    intent.putExtra("transDesp", mTranDesp.getText().toString());
+                    startActivity(intent);
+                    break;
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +71,11 @@ public class InsertTransferActivity extends AppCompatActivity {
     public void clickCase(View view) {
         switch (view.getId()) {
             case R.id.btn_tran_ok:
-                _insertTransfer();
+                if (mTranAccount.getText().toString().equals("") || mTranNum.getText().toString().equals("")) {
+                    ToastUtils.ToastLong(getApplication(), "对方账号名或待转时间币不能为空");
+                } else {
+                    _checkIfSetTransPW();
+                }
                 break;
             case R.id.btn_tran_back:
                 finish();
@@ -70,11 +83,8 @@ public class InsertTransferActivity extends AppCompatActivity {
         }
     }
 
-    private void _insertTransfer() {
-        RequestParams params = new RequestParams(Url.INSERT_TRANSFER_URL);
-        params.addBodyParameter("transToUserGuid", mTranAccount.getText().toString());
-        params.addBodyParameter("transCurrency", mTranNum.getText().toString());
-        params.addBodyParameter("transDesp", mTranDesp.getText().toString());
+    private void _checkIfSetTransPW() {
+        RequestParams params = new RequestParams(Url.QUERT_TRANSFER_PW_URL);
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -102,4 +112,6 @@ public class InsertTransferActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -25,7 +26,7 @@ public class CropImageUtils {
     //7.0  ContentUri
     public static final String FILE_CONTENT_FILEPROVIDER = "com.userinfosetting.fileprovider";
     private static CropImageUtils instance;
-    public static final String APP_NAME = "test";
+    public static final String APP_NAME = "timebank";
     //打开相机的返回码
     public static final int REQUEST_CODE_TAKE_PHOTO = 11111;
     //打开相册的返回码
@@ -114,6 +115,7 @@ public class CropImageUtils {
         Uri imageUri;
         Uri outputUri;
         crop_image = createImagePath(APP_NAME + "_crop_" + DATE);
+        Log.i("图片名称：", crop_image);
 
         Intent intent = new Intent("com.android.camera.action.CROP");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

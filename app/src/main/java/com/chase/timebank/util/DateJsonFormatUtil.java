@@ -16,4 +16,10 @@ public class DateJsonFormatUtil {
         sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         return sdf.format(dt);
     }
+    public static String longToBirthDate(long date) {
+        Date dt = new Date(date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        return sdf.format(dt);
+    }
 }

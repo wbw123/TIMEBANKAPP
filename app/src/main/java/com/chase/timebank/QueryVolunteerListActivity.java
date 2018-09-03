@@ -1,5 +1,7 @@
 package com.chase.timebank;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,7 +10,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.chase.timebank.adapter.ResQueryVolAdapter;
 import com.chase.timebank.bean.QueryResVolunteer;
@@ -33,7 +39,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QueryVolunteerListActivity extends AppCompatActivity implements OnRefreshListener, OnLoadmoreListener, ResQueryVolAdapter.OnRecyclerViewItemClickListener {
+public class QueryVolunteerListActivity extends AppCompatActivity implements OnRefreshListener, OnLoadmoreListener, ResQueryVolAdapter.OnRecyclerViewItemClickListener, ResQueryVolAdapter.ButtonInterface {
+    private static final int UPDATE_RES_EVALUATE_URL = 101;
     @BindView(R.id.srl_res_volunteer)
     SmartRefreshLayout mSrlResVol;
     @BindView(R.id.res_query_vol_header)
@@ -49,10 +56,21 @@ public class QueryVolunteerListActivity extends AppCompatActivity implements OnR
         @Override
         public void handleMessage(Message msg) {
             String result = (String) msg.obj;
-            //解析json数据
-            _processJson(result);
+            switch (msg.what) {
+                case UPDATE_RES_EVALUATE_URL:
+                    int update = Integer.valueOf(result);
+                    if (update == 1) {
+                        ToastUtils.ToastShort(QueryVolunteerListActivity.this, "评价成功！");
+                    } else {
+                        ToastUtils.ToastShort(QueryVolunteerListActivity.this, "服务器忙，请稍后评价！");
+                    }
+                    break;
+            }
+
+
         }
     };
+    private int resEvaluate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +80,7 @@ public class QueryVolunteerListActivity extends AppCompatActivity implements OnR
         mReqGuid = getIntent().getStringExtra("query_volunteer_reqGuid");
         initView();
         initData();
+//        showStarDialog();
     }
 
     private void initData() {
@@ -116,6 +135,7 @@ public class QueryVolunteerListActivity extends AppCompatActivity implements OnR
         ResQueryVolAdapter resQueryVolAdapter = new ResQueryVolAdapter(this, volunteerBeen);
         mResQueryVolList.setAdapter(resQueryVolAdapter);
         resQueryVolAdapter.setOnItemClickListener(this);
+        resQueryVolAdapter.setOnButtonClickListener(this);
     }
 
     private void _queryResVolList() {
@@ -125,10 +145,95 @@ public class QueryVolunteerListActivity extends AppCompatActivity implements OnR
             @Override
             public void onSuccess(String result) {
                 Log.i(TAG, result);
+                //解析json数据
+                _processJson(result);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.i(TAG, "onError: " + ex + "  ," + isOnCallback);
+
+            }
+
+            @Override
+            public void onCancelled(Callback.CancelledException cex) {
+                Log.i(TAG, "onCancelled: " + cex);
+
+            }
+
+            @Override
+            public void onFinished() {
+                Log.i(TAG, "onFinished");
+            }
+        });
+    }
+
+    @Override
+    public void onBtnclick(View view, final int position) {
+        switch (view.getId()) {
+            case R.id.btn_evaluate:
+                ToastUtils.ToastShort(this, "评价按钮被点击了");
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("请对志愿者评分");
+                View inflate = LayoutInflater.from(this).inflate(R.layout.dialog_star, null);
+                builder.setView(inflate);
+                RatingBar dialogRb = inflate.findViewById(R.id.dialog_rb);
+                final TextView dialogTv = inflate.findViewById(R.id.dialog_tv);
+                final EditText dialogEt = inflate.findViewById(R.id.dialog_et);
+                builder.setPositiveButton("提交", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String resEvaluateDes = dialogEt.getText().toString();
+                        String resGuid = volunteerBeen.get(position).getResGuid();
+                        _postEvaluateToServer(resEvaluateDes,resGuid);
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+                dialogRb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        ToastUtils.ToastLong(QueryVolunteerListActivity.this,"rating:"+rating);
+
+                        if (rating <= 1) {
+                            resEvaluate = 1;
+                            dialogTv.setText("非常不满意");
+                        } else if (rating > 1 && rating <= 2) {
+                            resEvaluate = 2;
+                            dialogTv.setText("不满意");
+                        } else if (rating > 2 && rating <= 3) {
+                            resEvaluate = 3;
+                            dialogTv.setText("还行");
+                        } else if (rating > 3 && rating <= 4) {
+                            resEvaluate = 4;
+                            dialogTv.setText("满意");
+                        } else {
+                            resEvaluate = 5;
+                            dialogTv.setText("非常满意");
+                        }
+                    }
+                });
+                break;
+        }
+    }
+    private void _postEvaluateToServer(String resEvaluateDes,String resGuid) {
+        RequestParams params = new RequestParams(Url.UPDATE_RES_EVALUATE_URL);
+        params.addBodyParameter("resEvaluate", String.valueOf(resEvaluate));
+        params.addBodyParameter("resEvaluateDes", resEvaluateDes);
+        params.addBodyParameter("resGuid", resGuid);
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.i(TAG, result);
                 Message msg = new Message();
                 msg.obj = result;
+                msg.what = UPDATE_RES_EVALUATE_URL;
                 mHandler.sendMessage(msg);
-                ToastUtils.ToastShort(getApplicationContext(), result);
             }
 
             @Override

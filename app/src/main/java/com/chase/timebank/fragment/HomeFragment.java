@@ -1,9 +1,13 @@
 package com.chase.timebank.fragment;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -80,6 +84,7 @@ public class HomeFragment extends BaseFragment {
     public void initData() {
         // 获取LocationClient
         mLocationClient = new LocationClient(mActivity);
+        getLocation();
         mBDLocationListener = new MyBDLocationListener();
         mLocationClient.registerLocationListener(mBDLocationListener);
 
@@ -162,7 +167,7 @@ public class HomeFragment extends BaseFragment {
                 Message msg = new Message();
                 msg.obj = result;
                 mHandler.sendMessage(msg);
-                ToastUtils.ToastShort(mActivity, result);
+//                ToastUtils.ToastShort(mActivity, result);
             }
 
             @Override
@@ -253,7 +258,48 @@ public class HomeFragment extends BaseFragment {
         bitmap = BitmapDescriptorFactory
                 .fromResource(R.drawable.marker);
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            ToastUtils.ToastShort(mActivity, "必须同意所有权限才能定位");
+//                            mActivity.finish();
+                            return;
+                        }
+                    }
+                    _requestLocation();
+                } else {
+                    ToastUtils.ToastShort(mActivity, "发生未知错误");
+                }
+                break;
+            default:
+        }
+    }
 
+    public void getLocation() {
+        ArrayList<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(mActivity,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(mActivity,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+//        if (ContextCompat.checkSelfPermission(mActivity,
+//                android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            permissionList.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//        }
+        if (!permissionList.isEmpty()) {
+            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(mActivity, permissions, 1);
+        } else {
+            _requestLocation();
+        }
+    }
 
     @Override
     public void onPause() {

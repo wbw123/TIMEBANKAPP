@@ -1,5 +1,6 @@
 package com.chase.timebank;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,9 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,6 +30,17 @@ import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiAddrInfo;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.sug.SuggestionSearch;
+import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
@@ -43,6 +58,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -55,7 +71,7 @@ public class InsertRequestActivity extends AppCompatActivity {
     @BindView(R.id.tv_req_avail_end_time)
     TextView mReqAvailEndTime;
     @BindView(R.id.et_req_address)
-    EditText mReqAddress;
+    AutoCompleteTextView mReqAddress;
     @BindView(R.id.et_req_title)
     EditText mReqTitle;
     @BindView(R.id.et_req_desp)
@@ -101,16 +117,144 @@ public class InsertRequestActivity extends AppCompatActivity {
     private LocationClient mLocationClient;
     private MyBDLocationListener mBDLocationListener;
     private String mAddress;
+    //检索地址返回的经纬度
+    private double longitude;
+    private double latitude;
+
+    private String[] arrAddr = new String[3];//存储经纬度地址
+
+    private boolean isChecked = false;//发布订单时，查看是否进行了地址检查的指针
+
+    private boolean isFirstCheck = true;//用来判断是否为第一次检查
+    private String mCurrentAddr;//当前地址
+    private String mCurrentCity;//当前城市
+
+    /*绑定AutoCompleteTextView的adapter进行地址检索*/
+    private PoiSearch mPoiSearch;
+    private SuggestionSearch mSuggestionSearch;
+    private ArrayAdapter<String> mSugAdapter;
+    private double mCurrentLat;
+    private double mCurrentLon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initBDloaction();
+        getLocation();
         setContentView(R.layout.activity_post_request);
         ButterKnife.bind(this);
+//        initPoiSearch();//初始化poi搜索模块
         initDatePicker();
         initClass();
         initUrgency();
+    }
+
+    /*PoiSearch好像没啥用*/
+    private void initPoiSearch() {
+        mPoiSearch = PoiSearch.newInstance();
+        mSuggestionSearch = SuggestionSearch.newInstance();
+        mSugAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line);
+        mReqAddress.setAdapter(mSugAdapter);
+        mPoiSearch.searchInCity(new PoiCitySearchOption()
+                .city(mCurrentCity)//定位的城市
+                .keyword(mReqAddress.getText().toString())
+                .isReturnAddr(true)
+                .pageCapacity(8)
+                .pageNum(1));
+        mPoiSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener() {
+            @Override
+            public void onGetPoiResult(PoiResult result) {
+                if (result == null
+                        || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+                    ToastUtils.ToastShort(InsertRequestActivity.this, "未找到结果");
+                    return;
+                }
+                if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+                    //成功在传入的搜索city中搜索到POI
+                    //对result进行一些应用
+                    //一般都是添加到地图中，然后绑定一些点击事件
+                    //官方Demo的处理如下：
+//                    mBaiduMap.clear();
+//                    PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
+//                    mBaiduMap.setOnMarkerClickListener(overlay);
+//                    //MyPoiOverlayextends PoiOverlay;PoiOverlay extends OverlayManager
+//                    //看了这三个class之间的关系后瞬间明白咱自己也可以写overlay，重写OverlayManager中的一些方法就可以了
+//                    //比如重写了点击事件，这个方法真的太好，对不同类型的图层可能有不同的点击事件，百度地图3.4.0之后就支持设置多个监听对象了，只是本人还没把这个方法彻底掌握...
+//                    overlay.setData(result);//图层数据
+//                    overlay.addToMap();//添加到地图中(添加的都是marker)
+//                    overlay.zoomToSpan();//保证能显示所有marker
+                    List<PoiAddrInfo> allAddr = result.getAllAddr();
+                    String name = allAddr.get(0).name;
+                    Log.i(TAG, "poiSearch:" + name);
+                    return;
+                }
+                if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
+
+                    // 当输入关键字在本市没有找到，但在其他城市找到时，返回包含该关键字信息的城市列表
+//                    String strInfo = "在";
+//                    for (CityInfo cityInfo : result.getSuggestCityList()) {
+//                        strInfo += cityInfo.city;
+//                        strInfo += ",";
+//                    }
+//                    strInfo += "找到结果";
+//                    Toast.makeText(PoiSearchDemo.this, strInfo, Toast.LENGTH_LONG)
+//                            .show();
+                }
+
+            }
+
+            @Override
+            public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+
+            }
+
+            @Override
+            public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
+
+            }
+        });
+        mSuggestionSearch.setOnGetSuggestionResultListener(new OnGetSuggestionResultListener() {
+            @Override
+            public void onGetSuggestionResult(SuggestionResult res) {
+                if (res == null || res.getAllSuggestions() == null) {
+                    return;
+                }
+
+                mSugAdapter.clear();
+                for (SuggestionResult.SuggestionInfo info : res.getAllSuggestions()) {
+                    if (info.key != null) {
+                        mSugAdapter.add(info.key);
+                    }
+                }
+                mSugAdapter.notifyDataSetChanged();
+
+            }
+        });
+        mReqAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence cs, int start, int count, int after) {
+                if (cs.length() <= 0) {
+                    return;
+                }
+                /**
+                 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+                 */
+                mSuggestionSearch
+                        .requestSuggestion((new SuggestionSearchOption())
+                                .keyword(cs.toString()).city(mCurrentCity));
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void initBDloaction() {
@@ -177,17 +321,19 @@ public class InsertRequestActivity extends AppCompatActivity {
     }
 
     private class MyBDLocationListener implements BDLocationListener {
+
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             // 非空判断
             if (bdLocation != null) {
                 // 根据BDLocation 对象获得经纬度以及详细地址信息
-                double latitude = bdLocation.getLatitude();
-                double longitude = bdLocation.getLongitude();
-                String address = bdLocation.getAddrStr();
-                Log.i(TAG, "address:" + address + " latitude:" + latitude
-                        + " longitude:" + longitude);
-                mReqAddress.setText(address);
+                mCurrentLat = bdLocation.getLatitude();
+                mCurrentLon = bdLocation.getLongitude();
+                mCurrentAddr = bdLocation.getAddrStr();
+                mCurrentCity = bdLocation.getCity();
+                initPoiSearch();//初始化poi搜索模块
+                Log.i(TAG, "address:" + mCurrentAddr + " latitude:" + mCurrentLat
+                        + " longitude:" + mCurrentLon);
                 if (mLocationClient.isStarted()) {
                     // 获得位置之后停止定位
                     mLocationClient.stop();
@@ -227,21 +373,29 @@ public class InsertRequestActivity extends AppCompatActivity {
                 TPview2.show();
                 break;
             case R.id.btn_req_save:
-                _insertReq();
+                mAddress = arrAddr[0] + "," + arrAddr[1] + "," + arrAddr[2];
+                if (isChecked) {
+                    _insertReq();
+                } else {
+                    ToastUtils.ToastShort(this, "请点击‘跳转到百度地图页面，确认地址准确性’");
+                }
                 break;
             case R.id.btn_req_back:
                 finish();
                 break;
             case R.id.btn_bd_location:
-                Log.d(TAG, "定位功能被点击了");
-                getLocation();
+                Log.d(TAG, "自动获取当前位置信息");
+//                getLocation();
+                mReqAddress.setText(mCurrentAddr);
                 break;
             case R.id.btn_check:
+                isChecked = true;
                 String addr = mReqAddress.getText().toString();
+
                 GeoCoder mSearch = GeoCoder.newInstance();
                 mSearch.setOnGetGeoCodeResultListener(listener);
                 mSearch.geocode(new GeoCodeOption()
-                        .city("青岛市")
+                        .city(mCurrentCity)
                         .address(addr));
                 break;
         }
@@ -249,15 +403,37 @@ public class InsertRequestActivity extends AppCompatActivity {
     }
 
     OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
+
         public void onGetGeoCodeResult(GeoCodeResult result) {
             if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                //没有检索到结果
+                //没有检索到结果,使用当前位置经纬度
+                latitude = mCurrentLat;
+                longitude = mCurrentLon;
             }
-            //获取地理编码结果
-            double latitude = result.getLocation().latitude;
-            double longitude = result.getLocation().longitude;
-            ToastUtils.ToastShort(getApplicationContext(), "latitude:"+latitude+";longitude"+longitude);
-            mAddress = latitude + "," + longitude + "," + mReqAddress.getText().toString();
+            if (result.getLocation() != null && isFirstCheck) {
+                //获取地理编码结果
+                latitude = result.getLocation().latitude;
+                longitude = result.getLocation().longitude;
+            }
+
+            //将经纬度地址保存到数组里
+            arrAddr[0] = String.valueOf(latitude);
+            arrAddr[1] = String.valueOf(longitude);
+            String s = mReqAddress.getText().toString();
+            if (s.replaceAll(" ", "").equals("")) {//当用户没有输入地址时，填写当前位置地址信息
+                mReqAddress.setText(mCurrentAddr);
+            }
+            arrAddr[2] = mReqAddress.getText().toString();
+
+            ToastUtils.ToastShort(getApplicationContext(), "latitude:" + latitude + ";longitude" + longitude);
+            Intent intent = new Intent(InsertRequestActivity.this, ReqMapActivity.class);
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
+            intent.putExtra("req_addr", mReqAddress.getText().toString());
+            startActivityForResult(intent, 1);
+
+//            mAddress = latitude + "," + longitude + "," + mReqAddress.getText().toString();
+
         }
 
         @Override
@@ -269,6 +445,28 @@ public class InsertRequestActivity extends AppCompatActivity {
             ToastUtils.ToastShort(getApplicationContext(), result.toString());
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 1) {
+            float back_latitude = data.getFloatExtra("back_latitude", 0);
+            float back_longitude = data.getFloatExtra("back_longitude", 0);
+            String back_req_addr = data.getStringExtra("back_req_addr");
+            isFirstCheck = data.getBooleanExtra("is_first_check", false);
+
+            //检索地址返回的经纬度赋值
+            latitude = back_latitude;
+            longitude = back_longitude;
+
+            mReqAddress.setText(back_req_addr);
+
+            //将经纬度地址保存到数组里
+            arrAddr[0] = String.valueOf(latitude);
+            arrAddr[1] = String.valueOf(longitude);
+            arrAddr[2] = back_req_addr;
+        }
+    }
 
     private void _insertReq() {
         RequestParams params = new RequestParams(Url.INSERT_REQ_URL);

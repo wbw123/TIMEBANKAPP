@@ -5,6 +5,7 @@ package com.chase.timebank.util;
  * Desc:
  */
 public class GlobalVariables {
-    public static String USER_ICON_FILE_PATH = "user_icon_file_path";
+    public static String USER_AVATAR_FILE_PATH = "user_avatar_file_path";
+    public static String USER_IDIMAGE_FILE_PATH = "user_idimage_file_path";
     public static String USER_NICK_NAME = "user_nick_name";
 }

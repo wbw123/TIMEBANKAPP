@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:gravity="center">
 
-    <com.chase.timebank.others.ScaleView
+    <ImageView
         android:id="@+id/imageview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
