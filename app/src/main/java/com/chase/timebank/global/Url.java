@@ -6,7 +6,7 @@ package com.chase.timebank.global;
 
 public class Url {
 //    public static final String BASE_URL = "http://192.168.141.81:8080";//wbw
-    public static final String BASE_URL = "http://192.168.1.111:8080";//wbw科技园
+    public static final String BASE_URL = "http://192.168.141.81:8080";//wbw科技园
 //    public static final String BASE_URL = "http://192.168.1.03:8080";//wbw TP-LINK 004
 //    public static final String BASE_URL = "http://192.168.141.122:8080";//wzd
 //    public static final String BASE_URL = "http://192.168.141.3:8080";//yl
@@ -76,8 +76,6 @@ public class Url {
     public static final String QUERT_TRANSFER_PW_URL = BASE_URL+"/appQueryTransferPW";
     //上传用户支付密码
     public static final String INSERT_TRANSFER_PW_URL = BASE_URL+"/appInsertTransferPW";
-
-
-
-
+    //查询用户时间币
+    public static final String QUERY_USER_CURRENCY = BASE_URL+"/appQueryUserCurrency";
 }

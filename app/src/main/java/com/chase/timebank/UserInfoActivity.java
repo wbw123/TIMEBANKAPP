@@ -112,7 +112,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private void showIcon() {
         //显示用户头像
         String avatar_path = SpUtil.getString(this, GlobalVariables.USER_AVATAR_FILE_PATH);
-        if (avatar_path != null && isFileExist(avatar_path)) {
+        if (!"".equals(avatar_path) && isFileExist(avatar_path)) {
             Bitmap bitmap = BitmapFactory.decodeFile(avatar_path);
             mUserAvatar.setImageBitmap(bitmap);
         }

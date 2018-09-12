@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.chase.timebank.R;
 import com.chase.timebank.bean.ReqMyBean.RowsBean;
+import com.chase.timebank.fragment.detail.RequestMyFragment;
 import com.chase.timebank.util.DateJsonFormatUtil;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class RequestMyAdapter extends RecyclerView.Adapter<RequestMyAdapter.MyHo
     private String availStartTime;
     private String availEndTime;
     private String issueTime;
+    private int mCount;
 
     public RequestMyAdapter(Activity activity, ArrayList<RowsBean> rows) {
         this.mContext = activity;
@@ -85,7 +87,12 @@ public class RequestMyAdapter extends RecyclerView.Adapter<RequestMyAdapter.MyHo
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+        mCount = RequestMyFragment.getCount();
+        if (mCount >= mDatas.size()){
+            return mDatas.size();
+        }else {
+            return mCount;
+        }
     }
 
     @Override

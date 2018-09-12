@@ -86,10 +86,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".news.NewsActivity"></activity>
-        <activity android:name=".ReqMapActivity"></activity>
-        <activity android:name=".TransferPasswordEditActivity"></activity>
-        <activity android:name=".TransferPasswordActivity"></activity>
+        <activity android:name=".news.NewsActivity" />
+        <activity android:name=".ReqMapActivity" />
+        <activity android:name=".TransferPasswordEditActivity" />
+        <activity android:name=".TransferPasswordActivity" />
+        <activity android:name=".EmptyActivity" />
+        <activity android:name=".MeRequestActivity"></activity>
     </application>
 
 </manifest>

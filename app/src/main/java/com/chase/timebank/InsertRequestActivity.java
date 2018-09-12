@@ -385,7 +385,7 @@ public class InsertRequestActivity extends AppCompatActivity {
                 break;
             case R.id.btn_bd_location:
                 Log.d(TAG, "自动获取当前位置信息");
-//                getLocation();
+//                getLocationPermission();
                 mReqAddress.setText(mCurrentAddr);
                 break;
             case R.id.btn_check:

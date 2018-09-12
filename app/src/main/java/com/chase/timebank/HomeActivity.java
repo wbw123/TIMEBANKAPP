@@ -32,7 +32,7 @@ import java.io.File;
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeActivity extends BaseActivity implements View.OnTouchListener, TabHost.OnTabChangeListener, View.OnClickListener ,NavigationView.OnNavigationItemSelectedListener{
+public class HomeActivity extends BaseActivity implements View.OnTouchListener, TabHost.OnTabChangeListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.nav_view)
     NavigationView mNavView;
     @BindView(R.id.fragmentTabHost)
@@ -48,6 +48,7 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
     private long mExitTime = 0;
 
     private String userRole;
+    private String userAccount;
 
     @Override
     protected int attachLayoutRes() {
@@ -91,7 +92,7 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
     public void initData() {
         super.initData();
         Intent intent = getIntent();
-        String userAccount = intent.getStringExtra("userAccount");
+        userAccount = intent.getStringExtra("userAccount");
         userRole = intent.getStringExtra("userRole");
         ToastUtils.ToastShort(this, userAccount + "登录了");
         //设置用户账号
@@ -103,6 +104,7 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
 
         //从本地获取用户头像
         showIcon();
+
     }
 
 
@@ -138,7 +140,6 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
                     return new View(HomeActivity.this);
                 }
             });
-
 
 
             //下面这些代码还是绑定  就是每个tabhost和对应的fragment绑定
@@ -196,7 +197,7 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
         switch (v.getId()) {
             case R.id.nav_header:
                 Log.i(TAG, "nav 头布局被点击了");
-                startActivity(new Intent(HomeActivity.this,UserInfoActivity.class));
+                startActivity(new Intent(HomeActivity.this, UserInfoActivity.class));
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 break;
         }
@@ -231,11 +232,12 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
     private void showIcon() {
         //显示用户头像
         String avatar_path = SpUtil.getString(this, GlobalVariables.USER_AVATAR_FILE_PATH);
-        if (avatar_path != null && isFileExist(avatar_path)) {
+        if (!"".equals(avatar_path) && isFileExist(avatar_path)) {
             Bitmap bitmap = BitmapFactory.decodeFile(avatar_path);
             mNavUserAvatar.setImageBitmap(bitmap);
         }
     }
+
     public static boolean isFileExist(String icon_path) {
         File file = new File(icon_path);
         if (file.exists()) {
@@ -250,4 +252,9 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
         Log.i(TAG, "onRestart");
         showIcon();
     }
+
+    public String getUserAccount() {
+        return userAccount;
+    }
+
 }

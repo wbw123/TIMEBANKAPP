@@ -77,9 +77,10 @@ public class LoginActivity extends AppCompatActivity {
                             break;
                         case 4:
                             ToastUtils.ToastShort(activity, "登录成功");
-                            Intent intent = new Intent(activity, HomeActivity.class);
-                            intent.putExtra("userAccount", activity.mUserName);
-                            intent.putExtra("userRole", resultModel.getMsg());
+                            Intent intent = new Intent(activity, EmptyActivity.class);
+//                            Intent intent = new Intent(activity, HomeActivity.class);
+                            intent.putExtra("lg_userAccount", activity.mUserName);
+                            intent.putExtra("lg_userRole", resultModel.getMsg());
                             activity.startActivity(intent);
                             activity.finish();
                             break;
