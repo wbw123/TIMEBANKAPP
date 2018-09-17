@@ -20,13 +20,14 @@ public class ActivityFragment extends BaseFragment {
     TabLayout mTabActTitle;
     CustomViewPager mVPActContent;
     private final String[] activityTitle = {"活动列表", "我的活动"};
+
     @Override
     public View initView() {
         View view = View.inflate(mActivity, R.layout.fragment_activity, null);
         TabLayout mTabActTitle = view.findViewById(R.id.tab_activity_title);
         CustomViewPager mVPActContent = view.findViewById(R.id.vp_activity_content);
         /*bind adapter*/
-        mVPActContent.setAdapter(new ActivityAdapter(getChildFragmentManager(),activityTitle));
+        mVPActContent.setAdapter(new ActivityAdapter(getChildFragmentManager(), activityTitle));
         mTabActTitle.setupWithViewPager(mVPActContent);
         return view;
     }

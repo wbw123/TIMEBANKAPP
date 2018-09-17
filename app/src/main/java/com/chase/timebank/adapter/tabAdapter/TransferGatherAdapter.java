@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.chase.timebank.R;
 import com.chase.timebank.bean.TransferGatherBean.GatherBean;
+import com.chase.timebank.fragment.detail.TransferGatherFragment;
 import com.chase.timebank.util.DateJsonFormatUtil;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class TransferGatherAdapter extends RecyclerView.Adapter<TransferGatherAd
     private Context mContext;
     private ArrayList<GatherBean> mDatas;
     private String issueTime;
+    private int mCount;
 
     public TransferGatherAdapter(Activity activity, ArrayList<GatherBean> rows) {
         this.mContext = activity;
@@ -48,38 +50,44 @@ public class TransferGatherAdapter extends RecyclerView.Adapter<TransferGatherAd
         }
         String transTypeGuidProcessStatus = mDatas.get(position).getTransTypeGuidProcessStatus();
         holder.gatherFromGuid.setText("转账者账号名："+mDatas.get(position).getTransFromUserGuid());
-        holder.gatherToAccount.setText("接受者账号名: " + mDatas.get(position).getTransToUserGuid());
+//        holder.gatherToAccount.setText("接受者账号名: " + mDatas.get(position).getTransToUserGuid());
         holder.gatherTime.setText("转账时间：" + issueTime);
         holder.gatherDesp.setText("备注：" + mDatas.get(position).getTransDesp());
         holder.gatherCurrency.setText("转账货币：" + mDatas.get(position).getTransCurrency());
         holder.gatherProcess.setText("转账进程：" + transTypeGuidProcessStatus);
-        if ("已完成".equals(transTypeGuidProcessStatus) || "拒绝".equals(transTypeGuidProcessStatus)) {
-            holder.gatherCancel.setTextColor(Color.parseColor("#afb4b4"));
-            holder.gatherCancel.setEnabled(false);
-            holder.gatherOk.setTextColor(Color.parseColor("#afb4b4"));
-            holder.gatherOk.setEnabled(false);
-        }
-        holder.gatherOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnButtonClickListener != null) {
-                    mOnButtonClickListener.onBtnclick(v,position);
-                }
-            }
-        });
-        holder.gatherCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnButtonClickListener != null) {
-                    mOnButtonClickListener.onBtnclick(v,position);
-                }
-            }
-        });
+//        if ("已完成".equals(transTypeGuidProcessStatus) || "拒绝".equals(transTypeGuidProcessStatus)) {
+//            holder.gatherCancel.setTextColor(Color.parseColor("#afb4b4"));
+//            holder.gatherCancel.setEnabled(false);
+//            holder.gatherOk.setTextColor(Color.parseColor("#afb4b4"));
+//            holder.gatherOk.setEnabled(false);
+//        }
+//        holder.gatherOk.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mOnButtonClickListener != null) {
+//                    mOnButtonClickListener.onBtnclick(v,position);
+//                }
+//            }
+//        });
+//        holder.gatherCancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mOnButtonClickListener != null) {
+//                    mOnButtonClickListener.onBtnclick(v,position);
+//                }
+//            }
+//        });
     }
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+//        return mDatas.size();
+        mCount = TransferGatherFragment.getCount();
+        if (mCount >= mDatas.size()){
+            return mDatas.size();
+        }else {
+            return mCount;
+        }
     }
 
     @Override
@@ -99,20 +107,20 @@ public class TransferGatherAdapter extends RecyclerView.Adapter<TransferGatherAd
     }
 
 
-    /*button点击事件*/
-    /**
-     * 按钮点击事件对应的接口
-     */
-    public interface ButtonInterface{
-        void onBtnclick(View view, int position);
-    }
-    private ButtonInterface mOnButtonClickListener = null;
-    /**
-     *按钮点击事件需要的方法
-     */
-    public void setOnButtonClickListener(ButtonInterface buttonInterface){
-        this.mOnButtonClickListener=buttonInterface;
-    }
+//    /*button点击事件*/
+//    /**
+//     * 按钮点击事件对应的接口
+//     */
+//    public interface ButtonInterface{
+//        void onBtnclick(View view, int position);
+//    }
+//    private ButtonInterface mOnButtonClickListener = null;
+//    /**
+//     *按钮点击事件需要的方法
+//     */
+//    public void setOnButtonClickListener(ButtonInterface buttonInterface){
+//        this.mOnButtonClickListener=buttonInterface;
+//    }
 
     class MyHolder extends RecyclerView.ViewHolder {
         private TextView gatherFromGuid;
@@ -121,19 +129,19 @@ public class TransferGatherAdapter extends RecyclerView.Adapter<TransferGatherAd
         private TextView gatherDesp;
         private TextView gatherCurrency;
         private TextView gatherProcess;
-        private Button gatherOk;
-        private Button gatherCancel;
+//        private Button gatherOk;
+//        private Button gatherCancel;
 
         public MyHolder(View itemView) {
             super(itemView);
             gatherFromGuid = itemView.findViewById(R.id.tran_gather_from_guid);
-            gatherToAccount = itemView.findViewById(R.id.tran_gather_to_account);
+//            gatherToAccount = itemView.findViewById(R.id.tran_gather_to_account);
             gatherTime = itemView.findViewById(R.id.tran_gather_time);
             gatherDesp = itemView.findViewById(R.id.tran_gather_desp);
             gatherCurrency = itemView.findViewById(R.id.tran_gather_currency);
             gatherProcess = itemView.findViewById(R.id.tran_gather_process);
-            gatherOk = itemView.findViewById(R.id.tran_gather_ok);
-            gatherCancel = itemView.findViewById(R.id.tran_gather_cancel);
+//            gatherOk = itemView.findViewById(R.id.tran_gather_ok);
+//            gatherCancel = itemView.findViewById(R.id.tran_gather_cancel);
 
         }
     }

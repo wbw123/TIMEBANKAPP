@@ -46,7 +46,7 @@ public class TransferPasswordActivity extends AppCompatActivity {
             Log.i(TAG, "json解析：" + resultModel.toString());
 
             switch (resultModel.getCode()) {
-                case 1://汇款提交成功，等待审核
+                case 1://汇款成功
                     ToastUtils.ToastLong(getApplicationContext(), resultModel.getMsg());
                     finish();
                     break;
@@ -55,6 +55,11 @@ public class TransferPasswordActivity extends AppCompatActivity {
                     finish();
                     break;
                 case 12://密码错误，请重新输入
+                    payEditText.remove();
+                    payEditText.remove();
+                    payEditText.remove();
+                    payEditText.remove();
+                    payEditText.remove();
                     payEditText.remove();
                     ToastUtils.ToastLong(getApplicationContext(), resultModel.getMsg());
 //                default:

@@ -76,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     RegisterHandler registerHandler = new RegisterHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -6,7 +6,7 @@ package com.chase.timebank.global;
 
 public class Url {
 //    public static final String BASE_URL = "http://192.168.141.81:8080";//wbw
-    public static final String BASE_URL = "http://192.168.141.81:8080";//wbw科技园
+    public static final String BASE_URL = "http://192.168.1.142:8080";//wbw科技园
 //    public static final String BASE_URL = "http://192.168.1.03:8080";//wbw TP-LINK 004
 //    public static final String BASE_URL = "http://192.168.141.122:8080";//wzd
 //    public static final String BASE_URL = "http://192.168.141.3:8080";//yl
@@ -32,7 +32,7 @@ public class Url {
 
     /*请求模块*/
     /*我的请求相关*/
-    public static final String QUERY_REQ_MY_URL = BASE_URL+"/appQueryReqMy";
+    public static final String QUERY_REQ_MY_URL = BASE_URL+"/appQueryReqMy";//我的需求列表
     public static final String UPDATE_REQ_URL = BASE_URL+"/appUpdateReq";
     public static final String CANCEL_REQ_URL = BASE_URL+"/appCancelReq";
     public static final String QUERY_VOLUNTEER_URL = BASE_URL+"/appQueryVolunteer";
@@ -56,10 +56,10 @@ public class Url {
 
     /*转账模块*/
     /*收款列表相关*/
-    public static final String INSERT_TRANSFER_URL = BASE_URL+"/appInsertTransfer";
-    public static final String QUERY_TRANSFER_GATHER_URL = BASE_URL+"/appQueryTransferGather";
-    public static final String TRANSFER_GATHER_OK_URL = BASE_URL+"/appTranGatherOk";
-    public static final String TRANSFER_GATHER_CANCEL_URL = BASE_URL+"/appTranGatherCancel";
+    public static final String INSERT_TRANSFER_URL = BASE_URL+"/appInsertTransfer";//汇款提交
+    public static final String QUERY_TRANSFER_GATHER_URL = BASE_URL+"/appQueryTransferGather";//收款列表
+    public static final String TRANSFER_GATHER_OK_URL = BASE_URL+"/appTranGatherOk";//确认收款
+    public static final String TRANSFER_GATHER_CANCEL_URL = BASE_URL+"/appTranGatherCancel";//拒绝收款
     /*汇款列表相关*/
     public static final String QUERY_TRANSFER_REMIT_URL = BASE_URL+"/appQueryTransferRemit";
 

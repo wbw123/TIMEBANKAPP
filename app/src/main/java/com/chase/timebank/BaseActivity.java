@@ -1,5 +1,10 @@
 package com.chase.timebank;
 
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.widget.DrawerLayout;
@@ -8,10 +13,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.toolbar)
@@ -31,6 +38,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
 
     /**
@@ -73,4 +84,5 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 初始化数据, 子类可以不实现
      */
     public void initData() {}
+
 }

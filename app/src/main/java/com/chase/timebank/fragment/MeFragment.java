@@ -85,6 +85,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         civ_me_pic.setOnClickListener(this);
         return view;
     }
+
     @Override
     public void initData() {
         _getUserCurrency();
@@ -155,12 +156,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onResume() {
         System.out.println("MeFragment onResume");
         super.onResume();
     }
+
     //从本地获取用户头像
     private void showIcon() {
         //显示用户头像
@@ -170,6 +171,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
             civ_me_pic.setImageBitmap(bitmap);
         }
     }
+
     public static boolean isFileExist(String icon_path) {
         File file = new File(icon_path);
         if (file.exists()) {

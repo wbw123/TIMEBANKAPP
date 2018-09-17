@@ -17,14 +17,15 @@ import com.chase.timebank.view.CustomViewPager;
  * 更新描述   ${TODO}
  */
 public class RequestFragment extends BaseFragment {
-    private final String[] requestTitle = {"最新需求","附近需求", "我的需求", "我的服务"};
+    private final String[] requestTitle = {"最新需求", "附近需求", "我的需求", "我的服务"};
+
     @Override
     public View initView() {
         View view = View.inflate(mActivity, R.layout.fragment_request, null);
         TabLayout mTabReqTitle = view.findViewById(R.id.tab_request_title);
         CustomViewPager mVPReqContent = view.findViewById(R.id.vp_request_content);
         /*bind adapter*/
-        mVPReqContent.setAdapter(new RequestAdapter(getChildFragmentManager(),requestTitle));
+        mVPReqContent.setAdapter(new RequestAdapter(getChildFragmentManager(), requestTitle));
         mTabReqTitle.setupWithViewPager(mVPReqContent);
         mVPReqContent.setOffscreenPageLimit(3);
         return view;

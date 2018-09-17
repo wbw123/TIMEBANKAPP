@@ -19,13 +19,14 @@ import com.chase.timebank.view.CustomViewPager;
 public class TransferFragment extends BaseFragment {
 
     private final String[] transfertTitle = {"收款列表", "汇款列表"};
+
     @Override
     public View initView() {
         View view = View.inflate(mActivity, R.layout.fragment_transfer, null);
         TabLayout mTabTranTitle = view.findViewById(R.id.tab_transfer_title);
         CustomViewPager mVPTranContent = view.findViewById(R.id.vp_transfer_content);
         /*bind adapter*/
-        mVPTranContent.setAdapter(new TransferAdapter(getChildFragmentManager(),transfertTitle));
+        mVPTranContent.setAdapter(new TransferAdapter(getChildFragmentManager(), transfertTitle));
         mTabTranTitle.setupWithViewPager(mVPTranContent);
         return view;
     }

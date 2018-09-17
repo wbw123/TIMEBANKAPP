@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NaviTts/NaviTts.iml" filepath="$PROJECT_DIR$/NaviTts/NaviTts.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TimeBank.iml" filepath="$PROJECT_DIR$/TimeBank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TimeBankApp.iml" filepath="$PROJECT_DIR$/TimeBankApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/onsdk_all/onsdk_all.iml" filepath="$PROJECT_DIR$/onsdk_all/onsdk_all.iml" />
     </modules>

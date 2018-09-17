@@ -81,7 +81,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
         }
     };
     private ArrayList<RowsBean> mRows;
-    private String mCache;//缓存
+    private String mCache;//缓存   String类型
     private static int count;//一次性展示数量
     private String mUserAccount;
 
@@ -122,7 +122,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
         mCache = CacheUtils.getCache(mUserAccount+Url.QUERY_REQ_MY_URL, mActivity);
         if (!TextUtils.isEmpty(mCache)) {
             Log.i(TAG, "有缓存 不自动刷新");
-            _processJson(mCache);
+            _processJson(mCache);//mCache为json类型的数据，解析缓存
         } else {
             //触发自动刷新
             mSrlReqMy.autoRefresh();
@@ -131,6 +131,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
 
     }
 
+    //下拉刷新
     @Override
     public void onRefresh(final RefreshLayout refreshlayout) {
         refreshlayout.getLayout().postDelayed(new Runnable() {
@@ -142,7 +143,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
                     Log.i(TAG, "发现缓存....");
                     _processJson(mCache);
                 }
-                //通过网络获取数据
+                //通过网络获取数据---我的请求列表
                 _queryMyReq();
                 refreshlayout.finishRefresh();//完成刷新
                 refreshlayout.setLoadmoreFinished(false);//可以出发加载更多事件
@@ -150,6 +151,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
         }, 1500);
     }
 
+    //上拉加载
     @Override
     public void onLoadmore(final RefreshLayout refreshlayout) {
         refreshlayout.getLayout().postDelayed(new Runnable() {
@@ -160,7 +162,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
                     // 有缓存 解析json缓存
                     _processJson(mCache);
                 } else {
-                    //通过网络获取数据
+                    //通过网络获取数据---我的请求列表
                     _queryMyReq();
                 }
                 refreshlayout.finishLoadmore();//完成加载更多
@@ -172,6 +174,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
         }, 1500);
     }
 
+    //解析数据
     private void _processJson(String result) {
         ReqMyBean reqMyBean = JsonResolveUtils.parseJsonToBean(result, ReqMyBean.class);
         Log.i(TAG, "json解析：" + reqMyBean.toString());
@@ -182,7 +185,7 @@ public class RequestMyFragment extends BaseFragment implements OnRefreshListener
             RequestMyAdapter reqMyAdapter = new RequestMyAdapter(mActivity, mRows);
             mRvReqMyRecyView.setAdapter(reqMyAdapter);
             reqMyAdapter.setOnItemClickListener(this);
-        } else {
+        } else {//数据为空时，设置空页面可见
             mRlBlank.setVisibility(View.VISIBLE);
         }
     }

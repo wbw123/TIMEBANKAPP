@@ -35,21 +35,23 @@ public class EmptyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empty);
 
+        //获取从LoginActivity中传递的数据
         Intent intent = getIntent();
         mEpUserAccount = intent.getStringExtra("lg_userAccount");
         mEpUserRole = intent.getStringExtra("lg_userRole");
-
 
         initGPS();
 //        getLocationPermission();
     }
 
+    //初始化GPS
     private void initGPS() {
-        lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-        boolean ok = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        //LocationManager可用来获取当前位置，调用android.app.Activity.getSystemService()方法获取LocationManager对象
+        lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);//位置服务
+        boolean ok = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);//判断是否打开了GPS定位
         if (ok) {//已经打开了GPS
             getLocationPermission();
-        } else {
+        } else {//未打开GPS
             AlertDialog.Builder da = new AlertDialog.Builder(this);
             da.setTitle("注意：");
             da.setMessage("1.部分机型若未开启GPS,地图功能无法正常使用\n" +
@@ -82,6 +84,9 @@ public class EmptyActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    对权限申请结果的逻辑处理：通过一个循环将申请的每个权限都进行了判断，如果有任何一个权限被拒绝，直接调用finish方法关闭当前程序，只有当所有权限都被用户同意了，才会调用
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -94,11 +99,10 @@ public class EmptyActivity extends AppCompatActivity {
                     for (int result : grantResults) {
                         if (result != PackageManager.PERMISSION_GRANTED) {
                             //有一个-1，就没授权成功
-
 //                            ToastUtils.ToastLong(this, "必须同意定位权限才能正常使用地图功能");
                             if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                                     permissions[0])) {
-                                showNoAskDialog();
+                                showNoAskDialog();//不在询问弹窗
                             } else {
                                 new AlertDialog.Builder(this)
                                         .setTitle("提示：")
@@ -113,7 +117,7 @@ public class EmptyActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();
-                                                _jumpToHomeACT();
+                                                _jumpToHomeACT();//跳转
                                                 EmptyActivity.this.finish();
                                             }
                                         })
@@ -124,7 +128,7 @@ public class EmptyActivity extends AppCompatActivity {
                     }
                     ToastUtils.ToastLong(this, "定位授权成功");
 
-                    _jumpToHomeACT();
+                    _jumpToHomeACT();//跳转
                     this.finish();
                 } else {
                     Log.i(TAG, "用户点击'拒绝'并勾选'不再询问'");
@@ -163,6 +167,9 @@ public class EmptyActivity extends AppCompatActivity {
                 .show();
     }
 
+    /*
+    申请位置权限，首先创建一个新的空的ArrayList集合，然后依次判断这两个权限是否被授权，如果没被授权就添加到list集合中，最后将list转换为数组，调用ActivityCompat.requestPermissions()一次性申请
+     */
     public void getLocationPermission() {
         ArrayList<String> permissionList = new ArrayList<>();
         if (ContextCompat.checkSelfPermission(this,
@@ -182,8 +189,8 @@ public class EmptyActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permissions, LOCATION_CODE);
         } else {
             ToastUtils.ToastLong(this, "定位功能已授权");
-            _jumpToHomeACT();
-            this.finish();
+            _jumpToHomeACT();//跳转到HomeActivity
+            this.finish();//关闭当前activity
         }
     }
 

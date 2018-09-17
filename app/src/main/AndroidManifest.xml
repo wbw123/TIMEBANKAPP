@@ -34,10 +34,12 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="i7vbfA7lX21bs9EZTfGNoYEl12ai6ZMs" />
+            android:value="lMGxEofq7isl2Gu2qa3wd8hnS4tmoTlG" />
 
-        <activity android:name=".HomeActivity" />
-
+        <activity android:name=".HomeActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".UserInfoActivity" />
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -48,10 +50,8 @@
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity" />
-        <activity
-            android:name=".UserInfoActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".LoginActivity"/>
+
         <activity android:name=".UserInfoEditActivity" />
         <activity android:name=".InsertRequestActivity" />
         <activity android:name=".RequestDetailActivity" />

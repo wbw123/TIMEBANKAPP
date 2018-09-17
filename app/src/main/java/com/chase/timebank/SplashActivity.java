@@ -78,7 +78,9 @@ public class SplashActivity extends AppCompatActivity {
                 default:
                     break;
             }
-        };
+        }
+
+        ;
     };
 
     @Override
@@ -227,7 +229,7 @@ public class SplashActivity extends AppCompatActivity {
             requestParams.setSaveFilePath(path);
             // 下载完成后自动为文件命名
             requestParams.setAutoRename(true);
-            x.http().get(requestParams, new Callback.ProgressCallback<File>(){
+            x.http().get(requestParams, new Callback.ProgressCallback<File>() {
                 // 在主线程运行
                 @Override
                 public void onSuccess(File result) {
@@ -242,6 +244,7 @@ public class SplashActivity extends AppCompatActivity {
                             "application/vnd.android.package-archive");
                     startActivityForResult(intent, 0);
                 }
+
                 // 在主线程运行
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
@@ -270,6 +273,7 @@ public class SplashActivity extends AppCompatActivity {
                 public void onStarted() {
 
                 }
+
                 // 在主线程运行
                 @Override
                 public void onLoading(long total, long current, boolean isDownloading) {

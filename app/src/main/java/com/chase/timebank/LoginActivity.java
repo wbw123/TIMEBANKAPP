@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView mTvForgetPassword;
     private static final String TAG = "LoginActivity";
     private static final int RETURN_LOGIN_MSG = 01;//请求成功码
+
     //TODO：用弱引用，防止内存溢出，程序崩溃 有时间的话之前的都得改
     private static class LoginHandler extends Handler {
         private final WeakReference<LoginActivity> mActivity;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     String result = (String) msg.obj;
                     //解析json数据
                     ResultModel resultModel = JsonResolveUtils.parseJsonToBean(result, ResultModel.class);
-                    Log.i(TAG, "json解析："+ resultModel.toString());
+                    Log.i(TAG, "json解析：" + resultModel.toString());
                     switch (resultModel.getCode()) {
                         case 0:
                         case 1:
@@ -79,16 +80,17 @@ public class LoginActivity extends AppCompatActivity {
                             ToastUtils.ToastShort(activity, "登录成功");
                             Intent intent = new Intent(activity, EmptyActivity.class);
 //                            Intent intent = new Intent(activity, HomeActivity.class);
-                            intent.putExtra("lg_userAccount", activity.mUserName);
-                            intent.putExtra("lg_userRole", resultModel.getMsg());
+                            intent.putExtra("lg_userAccount", activity.mUserName);//当前用户名
+                            intent.putExtra("lg_userRole", resultModel.getMsg());//传递数据，用户角色
                             activity.startActivity(intent);
-                            activity.finish();
+                            activity.finish();//关闭当前activity
                             break;
                     }
                     break;
             }
         }
     }
+
     LoginHandler loginHandler = new LoginHandler(this);
 
     private String mUserName;
@@ -137,19 +139,19 @@ public class LoginActivity extends AppCompatActivity {
                 msg.what = RETURN_LOGIN_MSG;
                 msg.obj = result;
                 loginHandler.sendMessage(msg);
-                ToastUtils.ToastShort(getApplicationContext(),"onSuccess: result=" + result);
+                ToastUtils.ToastShort(getApplicationContext(), "onSuccess: result=" + result);
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 Log.i(TAG, "onError: " + ex + "  ," + isOnCallback);
-                ToastUtils.ToastShort(getApplicationContext(),"onError: " + ex + "  ," + isOnCallback);
+                ToastUtils.ToastShort(getApplicationContext(), "onError: " + ex + "  ," + isOnCallback);
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
                 Log.i(TAG, "onCancelled: " + cex);
-                ToastUtils.ToastShort(getApplicationContext(),"onCancelled: " + cex);
+                ToastUtils.ToastShort(getApplicationContext(), "onCancelled: " + cex);
             }
 
             @Override

@@ -9,7 +9,6 @@
     tools:context="com.chase.timebank.LoginActivity">
 
     <Button
-        android:visibility="invisible"
         android:id="@+id/btn_skip"
         android:layout_width="60dp"
         android:layout_height="30dp"
@@ -20,7 +19,8 @@
         android:background="@drawable/btn_skip_selector"
         android:onClick="onClick"
         android:text="跳过"
-        android:textColor="#5c5c5c" />
+        android:textColor="#5c5c5c"
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/iv_logo"
@@ -41,8 +41,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
 
             <com.chase.timebank.view.CleanEditText
                 android:id="@+id/et_username"
@@ -59,8 +59,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/Theme.AppCompat.NoActionBar">
 
             <com.chase.timebank.view.CleanEditText
                 android:id="@+id/et_password"

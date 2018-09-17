@@ -223,6 +223,8 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
                 Intent intent3 = new Intent(this, NewsActivity.class);
                 startActivity(intent3);
                 break;
+            case R.id.nav_4:
+                break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -255,6 +257,19 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener, 
 
     public String getUserAccount() {
         return userAccount;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        int statusType = intent.getIntExtra("closeType", 0);
+        if (statusType == 1) {
+            //打开登录页
+            Intent intent1 = new Intent(this, LoginActivity.class);
+            startActivity(intent1);
+            finish();
+        }
     }
 
 }

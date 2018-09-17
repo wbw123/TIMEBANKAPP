@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.chase.timebank.R;
 import com.chase.timebank.bean.TransferGatherBean.GatherBean;
+import com.chase.timebank.fragment.detail.TransferRemitFragment;
 import com.chase.timebank.util.DateJsonFormatUtil;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class TransferRemitAdapter extends RecyclerView.Adapter<TransferRemitAdap
     private Context mContext;
     private ArrayList<GatherBean> mDatas;
     private String issueTime;
+    private int mCount;
 
     public TransferRemitAdapter(Activity activity, ArrayList<GatherBean> rows) {
         this.mContext = activity;
@@ -76,7 +78,13 @@ public class TransferRemitAdapter extends RecyclerView.Adapter<TransferRemitAdap
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+//        return mDatas.size();
+        mCount = TransferRemitFragment.getCount();
+        if (mCount >= mDatas.size()){
+            return mDatas.size();
+        }else {
+            return mCount;
+        }
     }
 
     @Override
@@ -128,5 +136,4 @@ public class TransferRemitAdapter extends RecyclerView.Adapter<TransferRemitAdap
 
         }
     }
-
 }

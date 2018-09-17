@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ReqMapActivity extends AppCompatActivity implements BaiduMap.OnMapClickListener{
+public class ReqMapActivity extends AppCompatActivity implements BaiduMap.OnMapClickListener {
     private static final String TAG = "ReqMapActivity";
     @BindView(R.id.map_view)
     MapView mMapView;
@@ -68,7 +68,7 @@ public class ReqMapActivity extends AppCompatActivity implements BaiduMap.OnMapC
         mBaiduMap.setMyLocationEnabled(true);
         LatLng ll = new LatLng(latx, laty);
         //MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll,f);
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, f-8);//设置缩放比例
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, f - 8);//设置缩放比例
         mBaiduMap.animateMapStatus(u);
 
         /*定位，构造地图数据*/
@@ -129,7 +129,7 @@ public class ReqMapActivity extends AppCompatActivity implements BaiduMap.OnMapC
         intent2.putExtra("back_longitude", laty);
         intent2.putExtra("back_req_addr", req_addr);
         intent2.putExtra("is_first_check", false);
-        setResult(1,intent2);
+        setResult(1, intent2);
     }
 
     @Override
@@ -137,8 +137,8 @@ public class ReqMapActivity extends AppCompatActivity implements BaiduMap.OnMapC
         mBaiduMap.clear();//这个方法清除地图上所有的mark点
         String mapPoiName = mapPoi.getName();
         LatLng mapPoiPosition = mapPoi.getPosition();
-        latx = (float)mapPoiPosition.latitude;
-        laty = (float)mapPoiPosition.longitude;
+        latx = (float) mapPoiPosition.latitude;
+        laty = (float) mapPoiPosition.longitude;
 
         //定义Maker坐标点
         mark();
@@ -147,9 +147,10 @@ public class ReqMapActivity extends AppCompatActivity implements BaiduMap.OnMapC
         intent3.putExtra("back_longitude", laty);
         intent3.putExtra("back_req_addr", mapPoiName);
         intent3.putExtra("is_first_check", false);
-        setResult(1,intent3);
+        setResult(1, intent3);
         return false;
     }
+
     private void mark() {
         //定义Maker坐标点
         LatLng point = new LatLng(latx, laty);

@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/nav_header"
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:paddingTop="30dp"
-        android:paddingBottom="10dp"
-        android:gravity="center"
         android:background="@color/meFragmentColor"
         android:clickable="true"
-        android:layout_height="wrap_content">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingTop="30dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_me_pic"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/husky0"
-            app:civ_border_width="1dp"
-            app:civ_border_color="@android:color/white"/>
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="1dp" />
 
         <TextView
             android:id="@+id/tv_me_userAccount"
@@ -31,49 +32,55 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:text="husky"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_request"
-        android:layout_marginTop="20dp"
-        android:padding="5dp"
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
+        android:layout_marginTop="20dp"
         android:background="@color/meFragmentColor"
-        android:orientation="horizontal">
+        android:clickable="true"
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/btn_request_selector"/>
+            android:src="@drawable/btn_request_selector" />
+
         <TextView
             style="@style/meFrag_tv_style"
             android:text="我的需求" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#4000"
+        android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_gravity="center"/>
+        android:background="#4000" />
+
     <LinearLayout
         android:id="@+id/ll_service"
-        android:padding="5dp"
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
         android:background="@color/meFragmentColor"
-        android:orientation="horizontal">
+        android:clickable="true"
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/btn_service_selector"/>
+            android:src="@drawable/btn_service_selector" />
+
         <TextView
             style="@style/meFrag_tv_style"
             android:text="我的服务" />
@@ -81,27 +88,29 @@
 
     <View
         android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_height="1dp"
-        android:background="#4000"
-        android:layout_gravity="center"/>
+        android:background="#4000" />
 
     <LinearLayout
         android:id="@+id/ll_transfer"
-        android:padding="5dp"
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
         android:background="@color/meFragmentColor"
-        android:orientation="horizontal">
+        android:clickable="true"
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <ImageView
             android:id="@+id/iv_night_img"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/btn_transfer_selector"/>
+            android:src="@drawable/btn_transfer_selector" />
+
         <TextView
             android:id="@+id/tv_night_text"
             style="@style/meFrag_tv_style"
@@ -111,25 +120,27 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#4000"
+        android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_gravity="center"/>
+        android:background="#4000" />
 
     <LinearLayout
         android:id="@+id/ll_clean"
-        android:padding="5dp"
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/meFragmentColor"
         android:clickable="true"
-        android:orientation="horizontal">
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="33dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/btn_clean_selector"/>
+            android:src="@drawable/btn_clean_selector" />
+
         <TextView
             style="@style/meFrag_tv_style"
             android:text="清除缓存" />
@@ -138,44 +149,49 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#4000"
+        android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_gravity="center"/>
+        android:background="#4000" />
 
     <LinearLayout
         android:id="@+id/ll_feedback"
-        android:padding="5dp"
-        android:onClick="onClick"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/meFragmentColor"
         android:clickable="true"
-        android:orientation="horizontal">
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/btn_feedback_selector"/>
+            android:src="@drawable/btn_feedback_selector" />
+
         <TextView
             style="@style/meFrag_tv_style"
             android:text="用户反馈" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ll_setting"
-        android:padding="5dp"
-        android:onClick="onClick"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
+        android:layout_marginTop="10dp"
         android:background="@color/meFragmentColor"
-        android:orientation="horizontal">
+        android:clickable="true"
+        android:onClick="onClick"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/btn_setting_selector"/>
+            android:src="@drawable/btn_setting_selector" />
+
         <TextView
             style="@style/meFrag_tv_style"
             android:text="设置" />

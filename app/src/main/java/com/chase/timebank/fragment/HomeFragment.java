@@ -95,7 +95,6 @@ public class HomeFragment extends BaseFragment {
         mBaiduMap = mMapView.getMap();
 
 
-
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {

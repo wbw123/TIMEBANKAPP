@@ -124,6 +124,19 @@ public class TransferPasswordEditActivity extends AppCompatActivity {
                                 _insertTransPWtoServer();
                             } else {
                                 ToastUtils.ToastLong(getApplication(),"两次输入密码不一致，请重新输入！");
+                                payEditText2.remove();
+                                payEditText2.remove();
+                                payEditText2.remove();
+                                payEditText2.remove();
+                                payEditText2.remove();
+                                payEditText2.remove();
+                                payEditText1.remove();
+                                payEditText1.remove();
+                                payEditText1.remove();
+                                payEditText1.remove();
+                                payEditText1.remove();
+                                payEditText1.remove();
+                                isFirstKeyborad = true;
                             }
                         } else {
                             ToastUtils.ToastShort(getApplication(), "密码必须为6位");

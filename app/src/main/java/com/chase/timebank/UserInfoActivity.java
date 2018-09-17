@@ -117,6 +117,7 @@ public class UserInfoActivity extends AppCompatActivity {
             mUserAvatar.setImageBitmap(bitmap);
         }
     }
+
     public static boolean isFileExist(String icon_path) {
         File file = new File(icon_path);
         if (file.exists()) {
@@ -156,7 +157,7 @@ public class UserInfoActivity extends AppCompatActivity {
         mAddress.setText(editAddress);
     }
 
-    @OnClick({R.id.btn_editInfo, R.id.btn_exit,R.id.iv_back})
+    @OnClick({R.id.btn_editInfo, R.id.btn_exit, R.id.iv_back})
     public void clickCase(View view) {
         switch (view.getId()) {
             case R.id.btn_editInfo:
@@ -167,14 +168,16 @@ public class UserInfoActivity extends AppCompatActivity {
                 intent.putExtra("userCom", mUserCom.getText());
                 intent.putExtra("Users", mUsers);
                 startActivity(intent);
-                overridePendingTransition(R.anim.anim_right_to_left_in,R.anim.anim_right_to_left_out);
+                overridePendingTransition(R.anim.anim_right_to_left_in, R.anim.anim_right_to_left_out);
                 break;
             case R.id.btn_exit:
-
+                Intent intent1 = new Intent(this, HomeActivity.class);
+                intent1.putExtra("closeType", 1);
+                startActivity(intent1);
                 break;
             case R.id.iv_back:
                 finish();
-                overridePendingTransition(R.anim.anim_left_to_right_in,R.anim.anim_left_to_right_out);
+                overridePendingTransition(R.anim.anim_left_to_right_in, R.anim.anim_left_to_right_out);
                 break;
         }
     }

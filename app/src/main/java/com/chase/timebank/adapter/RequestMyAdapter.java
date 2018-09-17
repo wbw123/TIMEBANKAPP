@@ -26,7 +26,7 @@ public class RequestMyAdapter extends RecyclerView.Adapter<RequestMyAdapter.MyHo
     private String availStartTime;
     private String availEndTime;
     private String issueTime;
-    private int mCount;
+    private int mCount;//一次性展示的数量
 
     public RequestMyAdapter(Activity activity, ArrayList<RowsBean> rows) {
         this.mContext = activity;
@@ -85,9 +85,11 @@ public class RequestMyAdapter extends RecyclerView.Adapter<RequestMyAdapter.MyHo
         }
     }
 
+    //获取item的数量
     @Override
     public int getItemCount() {
-        mCount = RequestMyFragment.getCount();
+        mCount = RequestMyFragment.getCount();//mCount为一次性展示的数量
+        //如果一次性展示的数量大于数据的数量，返回数据的数量
         if (mCount >= mDatas.size()){
             return mDatas.size();
         }else {
@@ -133,7 +135,6 @@ public class RequestMyAdapter extends RecyclerView.Adapter<RequestMyAdapter.MyHo
             ReqMyUrgency = itemView.findViewById(R.id.req_my_urgency);
             ReqMyApprStatus = itemView.findViewById(R.id.req_my_approve_status);
             ReqMyProcStatus = itemView.findViewById(R.id.req_my_process_status);
-
         }
     }
 
